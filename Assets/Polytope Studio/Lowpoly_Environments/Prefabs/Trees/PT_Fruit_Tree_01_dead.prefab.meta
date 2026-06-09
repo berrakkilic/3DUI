@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c6a512d95615f534cbe31aba1aaa354c
+guid: 3ad58da949d5de343b7c21cee04361ce
 PrefabImporter:
   externalObjects: {}
   userData: 
@@ -7,8 +7,8 @@ PrefabImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 122225
-  packageName: Lowpoly Medieval Peasants - Free - MEDIEVAL FANTASY SERIES
-  packageVersion: 4.2.1
+  productId: 164796
+  packageName: Lowpoly Medieval Priest - St Patrick - Free Pack
+  packageVersion: 1.1
   assetPath: Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_dead.prefab
-  uploadId: 721311
+  uploadId: 575755
