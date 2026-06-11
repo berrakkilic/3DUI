@@ -41,7 +41,7 @@ public class CinemachinePOVExtension : CinemachineExtension
 
     }
 
-    Vector2 deltaInput = inputManager.GetMouseDelta();
+    Vector2 deltaInput = inputManager.GetCameraLookDelta();
 
     startingRotation.x += deltaInput.x * horizontalSpeed * deltaTime;
 
