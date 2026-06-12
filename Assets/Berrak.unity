@@ -106779,7 +106779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.12468112
+      value: -0.12468113
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
@@ -106787,7 +106787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9846888
+      value: -0.9846889
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
@@ -122485,8 +122485,8 @@ MonoBehaviour:
   - 'Villager: You drank so much yesterday that you passed out in the tavern.'
   - 'Villager: Are you okay?'
   - 'You: Uh... I think so. But where is my flute?'
-  - 'Villager: Your flute? We don''t know. You should ask the magic priest. He lives
-    on the snail tower.'
+  - 'Villager: Your flute? We don''t know. You should ask the magic wizard. He lives
+    on the gazeboo.'
 --- !u!135 &1926009081
 SphereCollider:
   m_ObjectHideFlags: 0
