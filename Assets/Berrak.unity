@@ -22654,7 +22654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631585, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631586, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22705,8 +22705,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1823801949}
     - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
+      propertyPath: markerDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: skipAFewMarkers
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631588, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_Name
