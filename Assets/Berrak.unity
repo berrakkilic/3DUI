@@ -22652,17 +22652,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6852676263265631585, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631586, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.80571
+      value: 53.31
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631586, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.02217
+      value: 11.63
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631586, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -153.59169
+      value: -273.64
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631586, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22695,11 +22699,15 @@ PrefabInstance:
     - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1823688467}
+      objectReference: {fileID: 1498702018}
     - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1793930443}
+      objectReference: {fileID: 1823801949}
+    - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
+      propertyPath: skipAFewMarkers
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631588, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: m_Name
       value: BreadcrumbsPath
@@ -134136,7 +134144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2141981554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134167,7 +134175,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d874ffd18996741a5858ae9ba28fc9a0, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9173dd462f98e3a4c82ea8d72b048d82, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &2141981555
 Transform:

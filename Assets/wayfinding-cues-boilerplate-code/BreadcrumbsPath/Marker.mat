@@ -85,7 +85,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 0.9150943, g: 0.7808416, b: 0.07338012, a: 1}
-    - _Color: {r: 0.9150943, g: 0.7808416, b: 0.07338015, a: 1}
+    - _Color: {r: 0.9150943, g: 0.7808416, b: 0.07338009, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _UnlitColor: {r: 1, g: 1, b: 1, a: 1}
