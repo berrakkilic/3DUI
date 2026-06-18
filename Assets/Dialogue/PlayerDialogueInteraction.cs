@@ -12,8 +12,16 @@ public class PlayerDialogueInteraction : MonoBehaviour
     private NPCDialogue currentNPC;
     private int currentLineIndex = 0;
     private bool dialogueOpen = false;
+    private DancematTranslater danceMat;
+
+    private void Awake()
+    {
+        danceMat = FindObjectOfType<DancematTranslater>();
+    }
+
     void Update() {
-        if (currentNPC != null && Keyboard.current.eKey.wasPressedThisFrame)
+        bool selectedThisFrame = Keyboard.current.eKey.wasPressedThisFrame || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+        if (currentNPC != null && selectedThisFrame)
         {
             if (!dialogueOpen)
             {
