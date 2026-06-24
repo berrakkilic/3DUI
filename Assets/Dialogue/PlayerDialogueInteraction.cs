@@ -13,18 +13,27 @@ public class PlayerDialogueInteraction : MonoBehaviour
     private int currentLineIndex = 0;
     private bool dialogueOpen = false;
     void Update() {
-        if (currentNPC != null && Keyboard.current.eKey.wasPressedThisFrame)
-        {
+        if (currentNPC == null) return;
+        if (Keyboard.current.eKey.wasPressedThisFrame) {
             if (!dialogueOpen)
-            {
                 StartDialogue();
-            }
             else
-            {
                 NextLine();
-            }
+        } if (dialogueOpen && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            PreviousLine();
         }
     }
+
+private void PreviousLine()
+{
+    currentLineIndex--;
+
+    if (currentLineIndex < 0)
+        currentLineIndex = 0;
+
+    ShowLine();
+}
 
     private void StartDialogue() {
         dialogueOpen = true;
