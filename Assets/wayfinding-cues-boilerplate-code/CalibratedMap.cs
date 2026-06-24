@@ -12,27 +12,48 @@ public class CalibratedMap : MonoBehaviour
         public RectTransform mapPoint;
     }
 
-    [Header("References")]
-    [SerializeField] private Transform player;
+    [Header("References")] [SerializeField]
+    private Transform player;
+
     [SerializeField] private RectTransform playerIcon;
 
-    [Header("Calibration Points")]
-    [SerializeField] private List<CalibrationPoint> points = new List<CalibrationPoint>();
+    [Header("Calibration Points")] [SerializeField]
+    private List<CalibrationPoint> points = new List<CalibrationPoint>();
 
-    [Header("Tuning")]
-    [SerializeField] private float weightPower = 6f;
+    [Header("Tuning")] [SerializeField] private float weightPower = 6f;
 
-    [Header("Rotation")]
-    [SerializeField] private bool rotateWithPlayer = true;
+    [Header("Rotation")] [SerializeField] private bool rotateWithPlayer = true;
     [SerializeField] private float rotationOffset = 180f;
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (player == null || playerIcon == null || points.Count == 0)
+        RefreshMap();
+    }
+
+    public void RefreshMap()
+    {
+        if (player == null)
+        {
+            Debug.LogWarning("CalibratedMap: Player is missing.");
             return;
+        }
+
+        if (playerIcon == null)
+        {
+            Debug.LogWarning("CalibratedMap: PlayerIcon is missing.");
+            return;
+        }
+
+        Vector2 oldIconPosition = playerIcon.anchoredPosition;
 
         UpdatePosition();
         UpdateRotation();
+
+        Debug.Log(
+            "Map refreshed. Player world position: " + player.position +
+            " | Icon moved from " + oldIconPosition +
+            " to " + playerIcon.anchoredPosition
+        );
     }
 
     private void UpdatePosition()

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +6,7 @@ public class MapToggle : MonoBehaviour
 {
     [SerializeField] private GameObject mapPanel;
     [SerializeField] private MonoBehaviour[] disableWhileMapOpen;
+    [SerializeField] private CalibratedMap calibratedMap;
 
     private bool isOpen;
 
@@ -44,5 +46,14 @@ public class MapToggle : MonoBehaviour
 
         Cursor.visible = open;
         Cursor.lockState = open ? CursorLockMode.None : CursorLockMode.Locked;
+
+        if (open && calibratedMap != null)
+            StartCoroutine(RefreshMapAfterOneFrame());
+    }
+
+    private IEnumerator RefreshMapAfterOneFrame()
+    {
+        yield return null;
+        calibratedMap.RefreshMap();
     }
 }
