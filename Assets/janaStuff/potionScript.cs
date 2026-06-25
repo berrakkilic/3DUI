@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class potionScript : MonoBehaviour
 {
@@ -6,7 +7,6 @@ public class potionScript : MonoBehaviour
     public GameObject potion;
     public GameObject portalEntrance;
     public GameObject carryPotion;
-    public bool dropForTest;
     public bool dropOnce;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +15,6 @@ public class potionScript : MonoBehaviour
         potion.SetActive(true);
         carryPotion.SetActive(false);
         portalEntrance.SetActive(false);
-        dropForTest = false;
         dropOnce = false;
     }
 
@@ -29,7 +28,7 @@ public class potionScript : MonoBehaviour
             carryPotion.SetActive(true);
         }
 
-        if (dropForTest && !dropOnce) //Input.GetKeyDown(KeyCode.E)
+        if (Keyboard.current.eKey.wasPressedThisFrame && !dropOnce && pickedUpPotion) 
         {
             dropOnce = true;
             pickedUpPotion = false;
@@ -38,12 +37,4 @@ public class potionScript : MonoBehaviour
             portalEntrance.transform.position = carryPotion.transform.position + new Vector3(0.0f, -1.0f, 0.0f);
         }
     }
-
-    /*public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "potion")
-        {
-            pickedUpPotion = true;
-        }
-    }*/
 }

@@ -4,6 +4,7 @@ public class portalScript : MonoBehaviour
 {
     public GameObject player;
     public GameObject portalExit;
+    public shootingScript shootingScript;
 
     public void OnTriggerStay(Collider other)
     {
@@ -19,5 +20,6 @@ public class portalScript : MonoBehaviour
         player.transform.position = portalExit.transform.position;
         //player.transform.position.Set(portalExit.transform.position.x, portalExit.transform.position.y, portalExit.transform.position.z);
         cc.enabled = true;
+        shootingScript.isOutsideVillage = true;
     }
 }
