@@ -20,19 +20,29 @@ public class PlayerDialogueInteraction : MonoBehaviour
     }
 
     void Update() {
+        if (currentNPC == null) return;
         bool selectedThisFrame = Keyboard.current.eKey.wasPressedThisFrame || (danceMat != null && danceMat.PlayerSelectedThisFrame());
-        if (currentNPC != null && selectedThisFrame)
+        if (selectedThisFrame)
         {
             if (!dialogueOpen)
-            {
                 StartDialogue();
-            }
             else
-            {
                 NextLine();
-            }
+        } if (dialogueOpen && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            PreviousLine();
         }
     }
+
+private void PreviousLine()
+{
+    currentLineIndex--;
+
+    if (currentLineIndex < 0)
+        currentLineIndex = 0;
+
+    ShowLine();
+}
 
     private void StartDialogue() {
         dialogueOpen = true;
