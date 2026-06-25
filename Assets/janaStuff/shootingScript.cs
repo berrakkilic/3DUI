@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using static Cinemachine.CinemachineTargetGroup;
+
+using UnityEngine.InputSystem;
 
 public class shootingScript : MonoBehaviour
 {
@@ -11,22 +14,21 @@ public class shootingScript : MonoBehaviour
     public Camera fpsCam;
     public CharacterController controller;
     private InputManager inputManager;
+    public bool isOutsideVillage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         inputManager = InputManager.Instance;
+        isOutsideVillage = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //if (inputManager.) {
-        
-        /*if(Input.GetButtonDown("1"))
+     if(Keyboard.current.eKey.wasPressedThisFrame && isOutsideVillage)
         {
             shoot();
-        }*/ //no clue how the new input system package works and I hate it
+        }
     }
 
     void shoot()
