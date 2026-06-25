@@ -37,7 +37,7 @@ public class hintSelectionScript : MonoBehaviour
     {
         if (Keyboard.current.hKey.wasPressedThisFrame)
         {
-            Debug.Log("pressed the key!");
+            //Debug.Log("pressed the key!");
             if (!showHints)
             {
                 showHints = true;
@@ -72,12 +72,13 @@ public class hintSelectionScript : MonoBehaviour
                         Debug.Log("sth went wrong in the hint selection process #1");
                         break;
                 }
-                mapButton.colors = mapColors;
-                pathButton.colors = pathColors;
-                beaconButton.colors = beaconColors;
+                
 
                 StartCoroutine(selectionTimer(keyCounter));
             }
+            mapButton.colors = mapColors;
+            pathButton.colors = pathColors;
+            beaconButton.colors = beaconColors;
         }
     }
 
