@@ -14,13 +14,18 @@ public class hintSelectionScript : MonoBehaviour
     public bool showHints;
     public bool hintsWereHidden;
     public GameObject shownHints;
+    [SerializeField] private MapToggle mapToggle;
+    [SerializeField] private BreadcrumbsPath breadcrumbsPath;
 
-    //code for changing button colors from https://discussions.unity.com/t/how-to-change-button-color/817384/4 
+    //code for changing button colors from https://discussions.unity.com/t/how-to-change-button-color/817384/4
     ColorBlock mapColors;
     ColorBlock beaconColors;
     ColorBlock pathColors;
     Color beige;
     Color green;
+    private DancematTranslater danceMat;
+    private bool hintIsActive = false;
+    private int activeHintIndex = -1;
     private void Start()
     {
         mapColors = mapButton.colors;
@@ -31,12 +36,24 @@ public class hintSelectionScript : MonoBehaviour
         hintsWereHidden = true;
         beige = new Color(0.9411765f, 0.6784314f, 0.454902f);
         green = new Color(0.2471555f, 0.7660377f, 0.3631759f);
+        danceMat = FindObjectOfType<DancematTranslater>();
+        if (mapToggle == null)
+            mapToggle = FindObjectOfType<MapToggle>();
+        if (breadcrumbsPath == null)
+            breadcrumbsPath = FindObjectOfType<BreadcrumbsPath>();
     }
 
     void Update()
     {
-        if (Keyboard.current.hKey.wasPressedThisFrame)
+        bool hintPressed = Keyboard.current.hKey.wasPressedThisFrame
+            || (danceMat != null && danceMat.MapToggledThisFrame());
+        if (hintPressed)
         {
+            if (hintIsActive)
+            {
+                CloseActiveHint();
+                return;
+            }
             //Debug.Log("pressed the key!");
             if (!showHints)
             {
@@ -47,6 +64,8 @@ public class hintSelectionScript : MonoBehaviour
                 mapColors.normalColor = green;
                 beaconColors.normalColor = beige;
                 pathColors.normalColor = beige;
+                keyCounter++;
+                StartCoroutine(selectionTimer(keyCounter));
             }
             else
             { 
@@ -84,7 +103,7 @@ public class hintSelectionScript : MonoBehaviour
 
     IEnumerator selectionTimer(int keyCounterStart)
     { 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         if(keyCounter == keyCounterStart) //either I'm a goddamn genius or this is the wackiest code ever produced by (wo)man
         {
             giveHint(selection);
@@ -97,16 +116,16 @@ public class hintSelectionScript : MonoBehaviour
         switch (whichHint)
         {
             case 0:
-                //enable map here
-                Debug.Log("link to show map!");
+                if (mapToggle != null) mapToggle.SetMapOpen(true);
+                hintIsActive = true;
+                activeHintIndex = 0;
                 break;
             case 1:
                 //enable beacons here
                 Debug.Log("Link to show a beacon!");
                 break;
             case 2:
-                //enable button on map here
-                Debug.Log("Link to start breadcrumbs!");
+                if (breadcrumbsPath != null) breadcrumbsPath.CastBreadcrumbSpell();
                 break;
             default:
                 Debug.Log("sth went wrong in the hint selection process #2");
@@ -116,5 +135,13 @@ public class hintSelectionScript : MonoBehaviour
         hintsWereHidden = true;
         showHints = false;
         shownHints.SetActive(false);
+    }
+
+    void CloseActiveHint()
+    {
+        if (activeHintIndex == 0 && mapToggle != null) mapToggle.SetMapOpen(false);
+        if (activeHintIndex == 2 && breadcrumbsPath != null) breadcrumbsPath.Hide();
+        hintIsActive = false;
+        activeHintIndex = -1;
     }
 }

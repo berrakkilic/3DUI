@@ -14,18 +14,23 @@ public class shootingScript : MonoBehaviour
     public Camera fpsCam;
     public CharacterController controller;
     private InputManager inputManager;
+    private DancematTranslater danceMat;
     public bool isOutsideVillage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         inputManager = InputManager.Instance;
+        danceMat = FindObjectOfType<DancematTranslater>();
         isOutsideVillage = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-     if(Keyboard.current.eKey.wasPressedThisFrame && isOutsideVillage)
+        bool spellPressed = (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            || (danceMat != null && danceMat.SpellCastThisFrame());
+
+        if (spellPressed && isOutsideVillage)
         {
             shoot();
         }

@@ -7,86 +7,115 @@ public class DancematTranslater : MonoBehaviour
     private Vector2 matMovement = Vector2.zero;
     private Vector2 matLookMovement = Vector2.zero;
     private bool matJumped = false;
-    private bool matSelected = false;
+    private bool matInteracted = false;
+    private bool matSpellCast = false;
+    private bool matMapToggled = false;
+    private bool matDialogNext = false;
+    private bool matDialogBack = false;
 
     void Update()
     {
-        ReadInputsFromDevices(out matMovement, out matLookMovement, out matJumped, out matSelected);
+        ReadInputsFromDevices();
     }
 
-    private void ReadInputsFromDevices(out Vector2 movement, out Vector2 lookMovement, out bool jumped, out bool selected)
+    private void ReadInputsFromDevices()
     {
-        if (TryReadInputs(Joystick.current, out movement, out lookMovement, out jumped, out selected)) return;
+        matMovement = Vector2.zero;
+        matLookMovement = Vector2.zero;
+        matJumped = false;
+        matInteracted = false;
+        matSpellCast = false;
+        matMapToggled = false;
+        matDialogNext = false;
+        matDialogBack = false;
 
+        if (TryReadInputs(Joystick.current)) return;
         foreach (var joystick in Joystick.all)
-        {
-            if (TryReadInputs(joystick, out movement, out lookMovement, out jumped, out selected)) return;
-        }
-
-        if (TryReadInputs(Gamepad.current, out movement, out lookMovement, out jumped, out selected)) return;
-
+            if (TryReadInputs(joystick)) return;
+        if (TryReadInputs(Gamepad.current)) return;
         foreach (var gamepad in Gamepad.all)
-        {
-            if (TryReadInputs(gamepad, out movement, out lookMovement, out jumped, out selected)) return;
-        }
-
-        movement = Vector2.zero;
-        lookMovement = Vector2.zero;
-        jumped = false;
-        selected = false;
+            if (TryReadInputs(gamepad)) return;
     }
 
     public Vector2 GetMatMovement() => matMovement;
     public Vector2 GetMatLookMovement() => matLookMovement;
     public bool PlayerJumpedThisFrame() => matJumped;
-    public bool PlayerSelectedThisFrame() => matSelected;
+    public bool PlayerSelectedThisFrame() => matInteracted;
+    public bool SpellCastThisFrame() => matSpellCast;
+    public bool MapToggledThisFrame() => matMapToggled;
+    public bool DialogNextThisFrame() => matDialogNext;
+    public bool DialogBackThisFrame() => matDialogBack;
 
-    private bool TryReadInputs(InputDevice device, out Vector2 movement, out Vector2 lookMovement, out bool jumped, out bool selected)
+    private bool TryReadInputs(InputDevice device)
     {
-        movement = Vector2.zero;
-        lookMovement = Vector2.zero;
-        jumped = false;
-        selected = false;
-
         if (device == null) return false;
 
-        float x = 0f;
-        float y = 0f;
-
-        bool isLeftPressed = false;
-        bool isRightPressed = false;
+        bool shiftHeld = false;
+        bool leftArrow = false;
+        bool rightArrow = false;
+        bool forwardArrow = false;
+        bool backwardArrow = false;
+        bool selectJustPressed = false;
 
         foreach (var control in device.allControls)
         {
-            if (control is not ButtonControl button || !button.IsPressed()) continue;
-
+            if (control is not ButtonControl button) continue;
             string path = button.path;
-            if (path == "/Gamepad/buttonSouth") y = -1f;
-            if (path == "/Gamepad/buttonEast") y = 1f;
 
-            if (path == "/Gamepad/buttonWest") isLeftPressed = true;
-            if (path == "/Gamepad/buttonNorth") isRightPressed = true;
-
-            if (path == "/Gamepad/leftShoulder") lookMovement.y = 1f;
-            if (path == "/Gamepad/rightShoulder") lookMovement.y = -1f;
-            if (path == "/Gamepad/select") lookMovement.x = -1f;
-            if (path == "/Gamepad/start") lookMovement.x = 1f;
+            // hinten links = shift modifier
+            if (path == "/Gamepad/leftShoulder" && button.IsPressed()) shiftHeld = true;
+            // pfeil nach links
+            if (path == "/Gamepad/buttonWest" && button.IsPressed()) leftArrow = true;
+            // pfeil nach rechts
+            if (path == "/Gamepad/buttonNorth" && button.IsPressed()) rightArrow = true;
+            // pfeil nach vorne
+            if (path == "/Gamepad/buttonEast" && button.IsPressed()) forwardArrow = true;
+            // pfeil nach hinten
+            if (path == "/Gamepad/buttonSouth" && button.IsPressed()) backwardArrow = true;
+            // hinten rechts = hint menu
+            if (path == "/Gamepad/rightShoulder" && button.wasPressedThisFrame) matMapToggled = true;
+            // select
+            if (path == "/Gamepad/select" && button.wasPressedThisFrame) selectJustPressed = true;
+            // start = spell
+            if (path == "/Gamepad/start" && button.wasPressedThisFrame) matSpellCast = true;
         }
 
-        selected = isLeftPressed && isRightPressed;
-
-        if (isLeftPressed && isRightPressed)
+        // select allein = interact / mit shift = dialog zurück
+        if (selectJustPressed)
         {
-            jumped = true;
-            x = 0f;
+            if (shiftHeld) matDialogBack = true;
+            else matInteracted = true;
+        }
+
+        // links + rechts gleichzeitig = jump (unabhängig von shift)
+        matJumped = leftArrow && rightArrow;
+
+        if (shiftHeld)
+        {
+            // shift + links = nach links laufen
+            if (leftArrow && !rightArrow) matMovement.x = -1f;
+            // shift + rechts = nach rechts laufen
+            if (rightArrow && !leftArrow) matMovement.x = 1f;
+            // shift + vorne = nach oben schauen
+            if (forwardArrow) matLookMovement.y = 1f;
+            // shift + hinten = nach unten schauen
+            if (backwardArrow) matLookMovement.y = -1f;
         }
         else
         {
-            if (isLeftPressed) x = -1f;
-            if (isRightPressed) x = 1f;
+            // vorne = vorwärts laufen
+            if (forwardArrow) matMovement.y = 1f;
+            // hinten = rückwärts laufen
+            if (backwardArrow) matMovement.y = -1f;
+            // links/rechts = schauen (außer beim jump)
+            if (!matJumped)
+            {
+                if (leftArrow) matLookMovement.x = -1f;
+                if (rightArrow) matLookMovement.x = 1f;
+            }
         }
 
-        movement = new Vector2(x, y);
-        return movement != Vector2.zero || lookMovement != Vector2.zero || jumped || selected;
+        return matMovement != Vector2.zero || matLookMovement != Vector2.zero || matJumped
+            || matInteracted || matSpellCast || matMapToggled || matDialogNext || matDialogBack;
     }
 }

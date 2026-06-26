@@ -51758,6 +51758,8 @@ MonoBehaviour:
   showHints: 0
   hintsWereHidden: 0
   shownHints: {fileID: 1998618180}
+  mapToggle: {fileID: 0}
+  breadcrumbsPath: {fileID: 0}
 --- !u!1 &757554268
 GameObject:
   m_ObjectHideFlags: 0
@@ -118391,15 +118393,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.35403466
+      value: -0.35403457
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.1101146
+      value: -0.11011456
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.88682246
+      value: 0.8868225
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
@@ -118407,11 +118409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.12468112
+      value: -0.12468124
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0153039
+      value: 0.015303914
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
@@ -118419,7 +118421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.120864965
+      value: -0.12086496
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028842623, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalScale.x
@@ -131545,6 +131547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1871780405}
   - component: {fileID: 1871780404}
+  - component: {fileID: 1871780406}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -131564,6 +131567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456d661391f864d1f80693d4320f2ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  danceMat: {fileID: 0}
 --- !u!4 &1871780405
 Transform:
   m_ObjectHideFlags: 0
@@ -131579,6 +131583,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871780406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871780403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527aa92e527c1bf69a378ddf4759e476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DancematTranslater
 --- !u!1 &1873563180
 GameObject:
   m_ObjectHideFlags: 0
@@ -136045,6 +136061,8 @@ MonoBehaviour:
   showHints: 0
   hintsWereHidden: 0
   shownHints: {fileID: 1998618180}
+  mapToggle: {fileID: 595498076}
+  breadcrumbsPath: {fileID: 0}
 --- !u!43 &1999177096
 Mesh:
   m_ObjectHideFlags: 0

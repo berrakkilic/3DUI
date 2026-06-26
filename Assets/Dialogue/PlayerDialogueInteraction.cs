@@ -21,14 +21,26 @@ public class PlayerDialogueInteraction : MonoBehaviour
 
     void Update() {
         if (currentNPC == null) return;
-        bool selectedThisFrame = Keyboard.current.eKey.wasPressedThisFrame || (danceMat != null && danceMat.PlayerSelectedThisFrame());
-        if (selectedThisFrame)
+
+        bool interactThisFrame = Keyboard.current.eKey.wasPressedThisFrame
+            || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+
+        if (interactThisFrame)
         {
             if (!dialogueOpen)
                 StartDialogue();
             else
                 NextLine();
-        } if (dialogueOpen && Keyboard.current.rKey.wasPressedThisFrame)
+        }
+
+        if (dialogueOpen && (danceMat != null && danceMat.DialogNextThisFrame()))
+        {
+            NextLine();
+        }
+
+        bool goBackThisFrame = Keyboard.current.rKey.wasPressedThisFrame
+            || (danceMat != null && danceMat.DialogBackThisFrame());
+        if (dialogueOpen && goBackThisFrame)
         {
             PreviousLine();
         }

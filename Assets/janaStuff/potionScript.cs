@@ -8,6 +8,7 @@ public class potionScript : MonoBehaviour
     public GameObject portalEntrance;
     public GameObject carryPotion;
     public bool dropOnce;
+    private DancematTranslater danceMat;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,19 +17,22 @@ public class potionScript : MonoBehaviour
         carryPotion.SetActive(false);
         portalEntrance.SetActive(false);
         dropOnce = false;
+        danceMat = FindObjectOfType<DancematTranslater>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (pickedUpPotion)
-        { 
+        {
             //potion.transform.position = transform.position + transform.rotation * new Vector3(1.0f, 1.0f);
             potion.SetActive(false);
             carryPotion.SetActive(true);
         }
 
-        if (Keyboard.current.eKey.wasPressedThisFrame && !dropOnce && pickedUpPotion) 
+        bool dropPressed = (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+        if (dropPressed && !dropOnce && pickedUpPotion)
         {
             dropOnce = true;
             pickedUpPotion = false;
