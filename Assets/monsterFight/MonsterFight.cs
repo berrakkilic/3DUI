@@ -8,11 +8,13 @@ public class MonsterFight : MonoBehaviour
     [SerializeField] private float interactionDistance = 3f;
 
     private bool defeated = false;
+    private DancematTranslater danceMat;
 
     private void Start()
     {
         if (fluteDrop != null)
             fluteDrop.SetActive(false);
+        danceMat = FindObjectOfType<DancematTranslater>();
     }
 
     private void Update()
@@ -22,7 +24,10 @@ public class MonsterFight : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance <= interactionDistance && Keyboard.current.fKey.wasPressedThisFrame)
+        bool fightPressed = (Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
+            || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+
+        if (distance <= interactionDistance && fightPressed)
         {
             DefeatMonster();
         }

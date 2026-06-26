@@ -12,14 +12,35 @@ public class PlayerDialogueInteraction : MonoBehaviour
     private NPCDialogue currentNPC;
     private int currentLineIndex = 0;
     private bool dialogueOpen = false;
+    private DancematTranslater danceMat;
+
+    private void Awake()
+    {
+        danceMat = FindObjectOfType<DancematTranslater>();
+    }
+
     void Update() {
         if (currentNPC == null) return;
-        if (Keyboard.current.eKey.wasPressedThisFrame) {
+
+        bool interactThisFrame = Keyboard.current.eKey.wasPressedThisFrame
+            || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+
+        if (interactThisFrame)
+        {
             if (!dialogueOpen)
                 StartDialogue();
             else
                 NextLine();
-        } if (dialogueOpen && Keyboard.current.rKey.wasPressedThisFrame)
+        }
+
+        if (dialogueOpen && (danceMat != null && danceMat.DialogNextThisFrame()))
+        {
+            NextLine();
+        }
+
+        bool goBackThisFrame = Keyboard.current.rKey.wasPressedThisFrame
+            || (danceMat != null && danceMat.DialogBackThisFrame());
+        if (dialogueOpen && goBackThisFrame)
         {
             PreviousLine();
         }

@@ -9,29 +9,31 @@ public class MapToggle : MonoBehaviour
     [SerializeField] private CalibratedMap calibratedMap;
 
     private bool isOpen;
+    private DancematTranslater danceMat;
 
     private void Start()
     {
         SetMapOpen(false);
+        danceMat = FindObjectOfType<DancematTranslater>();
     }
 
     private void Update()
     {
-        if (Keyboard.current == null)
-            return;
+        bool toggleMap = (Keyboard.current != null && Keyboard.current.mKey.wasPressedThisFrame);
 
-        if (Keyboard.current.mKey.wasPressedThisFrame)
+        if (toggleMap)
         {
             SetMapOpen(!isOpen);
         }
 
-        if (isOpen && Keyboard.current.escapeKey.wasPressedThisFrame)
+        bool closeMap = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame);
+        if (isOpen && closeMap)
         {
             SetMapOpen(false);
         }
     }
 
-    private void SetMapOpen(bool open)
+    public void SetMapOpen(bool open)
     {
         isOpen = open;
 

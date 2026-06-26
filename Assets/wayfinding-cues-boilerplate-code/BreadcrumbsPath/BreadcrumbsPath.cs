@@ -41,7 +41,7 @@ public class BreadcrumbsPath : MonoBehaviour
         }
     }
 
-    private void CastBreadcrumbSpell()
+    public void CastBreadcrumbSpell()
     {
         if (revealRoutine != null)
         {
