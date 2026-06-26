@@ -12,6 +12,7 @@ public class CalibratedMap : MonoBehaviour
         public RectTransform mapPoint;
     }
 
+
     [Header("References")] [SerializeField]
     private Transform player;
 
