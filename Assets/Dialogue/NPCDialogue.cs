@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class NPCDialogue : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public enum BreadcrumbStoryRole
+    {
+        None,
+        Villager,
+        Wizard
+    }
+
     public string npcName;
 
-    [TextArea(3, 8)]
+    public BreadcrumbStoryRole breadcrumbStoryRole = BreadcrumbStoryRole.None;
 
+    [TextArea(3, 8)]
     public string[] dialogueLines;
 }

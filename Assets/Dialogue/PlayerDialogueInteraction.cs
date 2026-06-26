@@ -4,10 +4,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerDialogueInteraction : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TMP_Text speakerNameText;
     [SerializeField] private TMP_Text dialogueText;
+
+    [SerializeField] private BreadcrumbsPath breadcrumbsPath;
 
     private NPCDialogue currentNPC;
     private int currentLineIndex = 0;
@@ -17,9 +18,13 @@ public class PlayerDialogueInteraction : MonoBehaviour
     private void Awake()
     {
         danceMat = FindObjectOfType<DancematTranslater>();
+
+        if (breadcrumbsPath == null)
+            breadcrumbsPath = FindObjectOfType<BreadcrumbsPath>();
     }
 
-    void Update() {
+    void Update()
+    {
         if (currentNPC == null) return;
 
         bool interactThisFrame = Keyboard.current.eKey.wasPressedThisFrame
@@ -40,62 +45,81 @@ public class PlayerDialogueInteraction : MonoBehaviour
 
         bool goBackThisFrame = Keyboard.current.rKey.wasPressedThisFrame
             || (danceMat != null && danceMat.DialogBackThisFrame());
+
         if (dialogueOpen && goBackThisFrame)
         {
             PreviousLine();
         }
     }
 
-private void PreviousLine()
-{
-    currentLineIndex--;
+    private void PreviousLine()
+    {
+        currentLineIndex--;
 
-    if (currentLineIndex < 0)
-        currentLineIndex = 0;
+        if (currentLineIndex < 0)
+            currentLineIndex = 0;
 
-    ShowLine();
-}
+        ShowLine();
+    }
 
-    private void StartDialogue() {
+    private void StartDialogue()
+    {
         dialogueOpen = true;
         currentLineIndex = 0;
         dialoguePanel.SetActive(true);
         ShowLine();
     }
 
-    private void NextLine() {
+    private void NextLine()
+    {
         currentLineIndex++;
-        if (currentLineIndex >= currentNPC.dialogueLines.Length) {
-            EndDialogue();
-        } else {
+
+        if (currentLineIndex >= currentNPC.dialogueLines.Length)
+        {
+            EndDialogue(true);
+        }
+        else
+        {
             ShowLine();
         }
     }
 
-    private void ShowLine() {
+    private void ShowLine()
+    {
         speakerNameText.text = currentNPC.npcName;
         dialogueText.text = currentNPC.dialogueLines[currentLineIndex];
     }
 
-    private void EndDialogue() {
+    private void EndDialogue(bool completedDialogue)
+    {
+        if (completedDialogue && currentNPC != null && breadcrumbsPath != null)
+        {
+            breadcrumbsPath.OnNPCDialogueCompleted(currentNPC);
+        }
+
         dialogueOpen = false;
         dialoguePanel.SetActive(false);
         currentLineIndex = 0;
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         NPCDialogue npc = other.GetComponent<NPCDialogue>();
-        if (npc != null) {
+
+        if (npc != null)
+        {
             currentNPC = npc;
         }
     }
 
-    private void OnTriggerExit(Collider other) {
+    private void OnTriggerExit(Collider other)
+    {
         NPCDialogue npc = other.GetComponent<NPCDialogue>();
-        if (npc != null && npc == currentNPC) {
-            currentNPC = null;
-            EndDialogue();
-        }
 
+        if (npc != null && npc == currentNPC)
+        {
+            EndDialogue(false);
+            currentNPC = null;
+        }
     }
 }
