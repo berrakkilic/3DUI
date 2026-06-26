@@ -21,12 +21,29 @@ public class BreadcrumbsPath : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float navMeshSampleDistance = 5.0f;
 
+    [Header("Story Targets")]
+    [SerializeField] private Transform villagerTarget;
+    [SerializeField] private Transform wizardTarget;
+    [SerializeField] private Transform monsterTarget;
+
+    private enum BreadcrumbQuestStep
+    {
+        ToVillager,
+        ToWizard,
+        ToMonster
+    }
+
+    [SerializeField] private BreadcrumbQuestStep currentQuestStep = BreadcrumbQuestStep.ToVillager;
+
     private NavMeshPath currentPath;
     private Coroutine revealRoutine;
 
     private void Awake()
     {
         currentPath = new NavMeshPath();
+
+        SetTargetForCurrentQuestStep();
+
         HideMarkers();
     }
 
@@ -43,12 +60,71 @@ public class BreadcrumbsPath : MonoBehaviour
 
     public void CastBreadcrumbSpell()
     {
+        SetTargetForCurrentQuestStep();
+
         if (revealRoutine != null)
         {
             StopCoroutine(revealRoutine);
         }
 
         revealRoutine = StartCoroutine(RevealBreadcrumbsRoutine());
+    }
+
+    public void OnNPCDialogueCompleted(NPCDialogue npc)
+    {
+        if (npc == null)
+            return;
+
+        if (npc.breadcrumbStoryRole == NPCDialogue.BreadcrumbStoryRole.Villager
+            && currentQuestStep == BreadcrumbQuestStep.ToVillager)
+        {
+            currentQuestStep = BreadcrumbQuestStep.ToWizard;
+            SetTargetForCurrentQuestStep();
+            RefreshVisibleBreadcrumbs();
+        }
+        else if (npc.breadcrumbStoryRole == NPCDialogue.BreadcrumbStoryRole.Wizard
+            && currentQuestStep == BreadcrumbQuestStep.ToWizard)
+        {
+            currentQuestStep = BreadcrumbQuestStep.ToMonster;
+            SetTargetForCurrentQuestStep();
+            RefreshVisibleBreadcrumbs();
+        }
+    }
+
+    private void SetTargetForCurrentQuestStep()
+    {
+        switch (currentQuestStep)
+        {
+            case BreadcrumbQuestStep.ToVillager:
+                if (villagerTarget != null)
+                    target = villagerTarget;
+                break;
+
+            case BreadcrumbQuestStep.ToWizard:
+                if (wizardTarget != null)
+                    target = wizardTarget;
+                break;
+
+            case BreadcrumbQuestStep.ToMonster:
+                if (monsterTarget != null)
+                    target = monsterTarget;
+                break;
+        }
+    }
+
+    private void RefreshVisibleBreadcrumbs()
+    {
+        if (revealRoutine == null)
+            return;
+
+        if (TryCalculatePath(out Vector3[] pathCorners))
+        {
+            UpdateMarkers(pathCorners);
+        }
+        else
+        {
+            HideMarkers();
+        }
     }
 
     private IEnumerator RevealBreadcrumbsRoutine()

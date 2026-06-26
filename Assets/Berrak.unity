@@ -27800,16 +27800,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1823801949}
     - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
+      propertyPath: wizardTarget
+      value: 
+      objectReference: {fileID: 849096509}
+    - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: markerYOffset
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
+      propertyPath: monsterTarget
+      value: 
+      objectReference: {fileID: 2078847217}
+    - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: markerDistance
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
+      propertyPath: villagerTarget
+      value: 
+      objectReference: {fileID: 1005373089}
+    - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: skipAFewMarkers
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
       propertyPath: markers.Array.size
@@ -56098,6 +56110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: Magic Wizard
+  breadcrumbStoryRole: 2
   dialogueLines:
   - 'Wizard: I expected you.'
   - 'You: I lost my flute... I need it for my concert tonight!'
@@ -110913,7 +110926,7 @@ Transform:
   m_GameObject: {fileID: 1498702017}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.0033745882, z: -0, w: 0.99999434}
-  m_LocalPosition: {x: 47.49, y: 12.23, z: -254.47}
+  m_LocalPosition: {x: 49.06, y: 12.23, z: -253.374}
   m_LocalScale: {x: 1, y: 1.1068095, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -110973,6 +110986,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 739151248}
   speakerNameText: {fileID: 987350670}
   dialogueText: {fileID: 2142238871}
+  breadcrumbsPath: {fileID: 0}
 --- !u!136 &1498702022
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -119053,15 +119067,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.35403457
+      value: -0.35403466
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.11011456
+      value: -0.1101146
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8868225
+      value: 0.88682246
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
@@ -119069,19 +119083,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.12468113
+      value: -0.12468112
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.015303914
+      value: 0.0153039
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9846889
+      value: -0.9846888
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.12086496
+      value: -0.120864965
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028842623, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalScale.x
@@ -120722,7 +120736,7 @@ Transform:
   m_GameObject: {fileID: 1628306074}
   serializedVersion: 2
   m_LocalRotation: {x: 8.526106e-11, y: 0.99999756, z: 0.000000040588485, w: 0.0022282787}
-  m_LocalPosition: {x: 47.49, y: 12.562042, z: -254.47}
+  m_LocalPosition: {x: 49.06, y: 12.562042, z: -253.374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -128482,7 +128496,7 @@ Transform:
   m_GameObject: {fileID: 1823688464}
   serializedVersion: 2
   m_LocalRotation: {x: 8.526106e-11, y: 0.99999756, z: 0.000000040588485, w: 0.0022282787}
-  m_LocalPosition: {x: 47.49, y: 12.562042, z: -254.47}
+  m_LocalPosition: {x: 49.06, y: 12.562042, z: -253.374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -134972,6 +134986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: VillageWoman
+  breadcrumbStoryRole: 1
   dialogueLines:
   - 'Villager: Hey you, you''re finally awake! We were worried.'
   - 'Villager: You drank so much yesterday that you passed out in the tavern.'
@@ -142266,6 +142281,11 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 4
   m_Center: {x: 0, y: 0.08728719, z: 0.4583586}
+--- !u!4 &2078847217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6036988292253137531, guid: 24a0663f813d4beb91fc0c6b1e8fef36, type: 3}
+  m_PrefabInstance: {fileID: 525417533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2085777048
 Mesh:
   m_ObjectHideFlags: 0
@@ -145043,6 +145063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: WelcomeBoy
+  breadcrumbStoryRole: 0
   dialogueLines:
   - 'Boy: I reject this ginger life.
 
