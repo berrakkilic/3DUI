@@ -140,7 +140,6 @@ public class hintSelectionScript : MonoBehaviour
     void CloseActiveHint()
     {
         if (activeHintIndex == 0 && mapToggle != null) mapToggle.SetMapOpen(false);
-        if (activeHintIndex == 2 && breadcrumbsPath != null) breadcrumbsPath.Hide();
         hintIsActive = false;
         activeHintIndex = -1;
     }
