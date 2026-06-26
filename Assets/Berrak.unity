@@ -52110,6 +52110,7 @@ MonoBehaviour:
   shownHints: {fileID: 1998618180}
   mapToggle: {fileID: 0}
   breadcrumbsPath: {fileID: 0}
+  beaconManager: {fileID: 0}
 --- !u!1 &757554268
 GameObject:
   m_ObjectHideFlags: 0
@@ -80321,6 +80322,54 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1232596823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1232596825}
+  - component: {fileID: 1232596824}
+  m_Layer: 0
+  m_Name: Beacon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1232596824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232596823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515814ccb0ed8a6adb107baa71b3b895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeaconManager
+  wizardTarget: {fileID: 1295587522}
+  monsterTarget: {fileID: 2078847217}
+  beaconHeight: 4
+  beaconDuration: 3
+--- !u!4 &1232596825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232596823}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1233916128
 GameObject:
   m_ObjectHideFlags: 0
@@ -84393,6 +84442,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287238460}
   m_CullTransparentMesh: 1
+--- !u!4 &1295587522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4668634257833992, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
+  m_PrefabInstance: {fileID: 234437266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1298767177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119069,7 +119123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.12468113
+      value: -0.12468124
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
@@ -119077,7 +119131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9846889
+      value: -0.9846888
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
@@ -132263,6 +132317,7 @@ GameObject:
   - component: {fileID: 1871780405}
   - component: {fileID: 1871780404}
   - component: {fileID: 1871780406}
+  - component: {fileID: 1871780407}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -132310,6 +132365,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527aa92e527c1bf69a378ddf4759e476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DancematTranslater
+--- !u!114 &1871780407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871780403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5946cc36cc1d744b8ae52d8224be6b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RestartScript
 --- !u!1 &1873563180
 GameObject:
   m_ObjectHideFlags: 0
@@ -136778,6 +136845,7 @@ MonoBehaviour:
   shownHints: {fileID: 1998618180}
   mapToggle: {fileID: 595498076}
   breadcrumbsPath: {fileID: 0}
+  beaconManager: {fileID: 0}
 --- !u!43 &1999177096
 Mesh:
   m_ObjectHideFlags: 0
@@ -142266,6 +142334,11 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 4
   m_Center: {x: 0, y: 0.08728719, z: 0.4583586}
+--- !u!4 &2078847217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6036988292253137531, guid: 24a0663f813d4beb91fc0c6b1e8fef36, type: 3}
+  m_PrefabInstance: {fileID: 525417533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2085777048
 Mesh:
   m_ObjectHideFlags: 0
@@ -147385,3 +147458,4 @@ SceneRoots:
   - {fileID: 1425930381}
   - {fileID: 570070654}
   - {fileID: 567569429}
+  - {fileID: 1232596825}

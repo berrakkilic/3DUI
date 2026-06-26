@@ -16,6 +16,7 @@ public class hintSelectionScript : MonoBehaviour
     public GameObject shownHints;
     [SerializeField] private MapToggle mapToggle;
     [SerializeField] private BreadcrumbsPath breadcrumbsPath;
+    [SerializeField] private BeaconManager beaconManager;
 
     //code for changing button colors from https://discussions.unity.com/t/how-to-change-button-color/817384/4
     ColorBlock mapColors;
@@ -41,6 +42,8 @@ public class hintSelectionScript : MonoBehaviour
             mapToggle = FindObjectOfType<MapToggle>();
         if (breadcrumbsPath == null)
             breadcrumbsPath = FindObjectOfType<BreadcrumbsPath>();
+        if (beaconManager == null)
+            beaconManager = FindObjectOfType<BeaconManager>();
     }
 
     void Update()
@@ -121,8 +124,7 @@ public class hintSelectionScript : MonoBehaviour
                 activeHintIndex = 0;
                 break;
             case 1:
-                //enable beacons here
-                Debug.Log("Link to show a beacon!");
+                if (beaconManager != null) beaconManager.ShowBeacon();
                 break;
             case 2:
                 if (breadcrumbsPath != null) breadcrumbsPath.CastBreadcrumbSpell();

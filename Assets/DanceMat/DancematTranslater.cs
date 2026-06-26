@@ -12,6 +12,7 @@ public class DancematTranslater : MonoBehaviour
     private bool matMapToggled = false;
     private bool matDialogNext = false;
     private bool matDialogBack = false;
+    private bool matRestart = false;
 
     void Update()
     {
@@ -28,6 +29,7 @@ public class DancematTranslater : MonoBehaviour
         matMapToggled = false;
         matDialogNext = false;
         matDialogBack = false;
+        matRestart = false;
 
         if (TryReadInputs(Joystick.current)) return;
         foreach (var joystick in Joystick.all)
@@ -45,6 +47,7 @@ public class DancematTranslater : MonoBehaviour
     public bool MapToggledThisFrame() => matMapToggled;
     public bool DialogNextThisFrame() => matDialogNext;
     public bool DialogBackThisFrame() => matDialogBack;
+    public bool RestartPressedThisFrame() => matRestart;
 
     private bool TryReadInputs(InputDevice device)
     {
@@ -76,15 +79,15 @@ public class DancematTranslater : MonoBehaviour
             if (path == "/Gamepad/rightShoulder" && button.wasPressedThisFrame) matMapToggled = true;
             // select
             if (path == "/Gamepad/select" && button.wasPressedThisFrame) selectJustPressed = true;
-            // start = spell
-            if (path == "/Gamepad/start" && button.wasPressedThisFrame) matSpellCast = true;
+            // start = restart
+            if (path == "/Gamepad/start" && button.wasPressedThisFrame) matRestart = true;
         }
 
-        // select allein = interact / mit shift = dialog zurück
+        // select allein = interact + spell / mit shift = dialog zurück
         if (selectJustPressed)
         {
             if (shiftHeld) matDialogBack = true;
-            else matInteracted = true;
+            else { matInteracted = true; matSpellCast = true; }
         }
 
         // links + rechts gleichzeitig = jump (unabhängig von shift)
@@ -116,6 +119,6 @@ public class DancematTranslater : MonoBehaviour
         }
 
         return matMovement != Vector2.zero || matLookMovement != Vector2.zero || matJumped
-            || matInteracted || matSpellCast || matMapToggled || matDialogNext || matDialogBack;
+            || matInteracted || matSpellCast || matMapToggled || matDialogNext || matDialogBack || matRestart;
     }
 }
