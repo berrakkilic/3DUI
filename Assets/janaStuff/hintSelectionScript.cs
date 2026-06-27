@@ -8,6 +8,8 @@ public class hintSelectionScript : MonoBehaviour
     public Button mapButton; // =0
     public Button beaconButton; // =1
     public Button pathButton; // =2
+    public GameObject buttonsExplain; //=3
+    public Button explainButton;
 
     public int selection = 0;
     int keyCounter = 0;
@@ -22,6 +24,7 @@ public class hintSelectionScript : MonoBehaviour
     ColorBlock mapColors;
     ColorBlock beaconColors;
     ColorBlock pathColors;
+    ColorBlock explainColors;
     Color beige;
     Color green;
     private DancematTranslater danceMat;
@@ -32,6 +35,7 @@ public class hintSelectionScript : MonoBehaviour
         mapColors = mapButton.colors;
         beaconColors = beaconButton.colors;
         pathColors = pathButton.colors;
+        explainColors = explainButton.colors;
         showHints = false;
         shownHints.SetActive(false);
         hintsWereHidden = true;
@@ -67,6 +71,7 @@ public class hintSelectionScript : MonoBehaviour
                 mapColors.normalColor = green;
                 beaconColors.normalColor = beige;
                 pathColors.normalColor = beige;
+                explainColors.normalColor = beige;
                 keyCounter++;
                 StartCoroutine(selectionTimer(keyCounter));
             }
@@ -74,10 +79,11 @@ public class hintSelectionScript : MonoBehaviour
             { 
                 selection++;
                 keyCounter++;
-                selection = selection % 3;
+                selection = selection % 4;
                 mapColors.normalColor = beige;
                 beaconColors.normalColor = beige;
                 pathColors.normalColor = beige;
+                explainColors.normalColor = beige;
 
                 switch (selection)
                 {
@@ -90,6 +96,9 @@ public class hintSelectionScript : MonoBehaviour
                     case 2:
                         pathColors.normalColor = green;
                         break;
+                    case 3:
+                        explainColors.normalColor = green;
+                        break;
                     default:
                         Debug.Log("sth went wrong in the hint selection process #1");
                         break;
@@ -101,6 +110,7 @@ public class hintSelectionScript : MonoBehaviour
             mapButton.colors = mapColors;
             pathButton.colors = pathColors;
             beaconButton.colors = beaconColors;
+            explainButton.colors = explainColors;
         }
     }
 
@@ -128,6 +138,9 @@ public class hintSelectionScript : MonoBehaviour
                 break;
             case 2:
                 if (breadcrumbsPath != null) breadcrumbsPath.CastBreadcrumbSpell();
+                break;
+            case 3:
+                buttonsExplain.SetActive(true);
                 break;
             default:
                 Debug.Log("sth went wrong in the hint selection process #2");
