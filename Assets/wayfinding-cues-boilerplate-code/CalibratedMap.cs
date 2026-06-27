@@ -50,11 +50,11 @@ public class CalibratedMap : MonoBehaviour
         UpdatePosition();
         UpdateRotation();
 
-        Debug.Log(
+        /*Debug.Log(
             "Map refreshed. Player world position: " + player.position +
             " | Icon moved from " + oldIconPosition +
             " to " + playerIcon.anchoredPosition
-        );
+        );*/
     }
 
     private void UpdatePosition()

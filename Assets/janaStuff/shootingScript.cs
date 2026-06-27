@@ -28,8 +28,8 @@ public class shootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool spellPressed = (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
-            || (danceMat != null && danceMat.SpellCastThisFrame());
+        bool spellPressed = (((Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            || (danceMat != null && danceMat.SpellCastThisFrame())) && isOutsideVillage);
 
         if (spellPressed)
         {

@@ -38,7 +38,7 @@ public class potionScript : MonoBehaviour
             pickedUpPotion = false;
             carryPotion.SetActive(false);
             portalEntrance.SetActive(true);
-            portalEntrance.transform.position = carryPotion.transform.position + new Vector3(0.0f, -1.0f, 0.0f);
+            portalEntrance.transform.position = carryPotion.transform.position + new Vector3(-2.0f, -1.0f, 1.0f);
         }
     }
 }

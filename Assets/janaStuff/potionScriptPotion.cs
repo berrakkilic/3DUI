@@ -1,11 +1,19 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class potionScriptPotion : MonoBehaviour
 {
     public potionScript potionScript;
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
-        potionScript.pickedUpPotion = true;
+        //Debug.Log("in trigger range");
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            //Debug.Log("pressed correct key");
+            potionScript.pickedUpPotion = true;
+        }
     }
+
+    
 }
