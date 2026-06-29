@@ -7,8 +7,10 @@ public class fluteScript : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
+        Debug.Log("got into trigger zone");
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
+            Debug.Log("pressed correct key, should pick up flute");
             fluteScriptPlayer.pickedUpFlute = true;
         }
     }

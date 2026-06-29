@@ -17,6 +17,8 @@ public class shootingScript : MonoBehaviour
     private InputManager inputManager;
     private DancematTranslater danceMat;
     public bool isOutsideVillage;
+    public bool monsterNotDead;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,7 +31,7 @@ public class shootingScript : MonoBehaviour
     void Update()
     {
         bool spellPressed = (((Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
-            || (danceMat != null && danceMat.SpellCastThisFrame())) && isOutsideVillage);
+            || (danceMat != null && danceMat.SpellCastThisFrame())) && isOutsideVillage && monsterNotDead);
 
         if (spellPressed)
         {

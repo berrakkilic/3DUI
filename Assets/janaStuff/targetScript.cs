@@ -12,6 +12,7 @@ public class targetScript : MonoBehaviour
 
     [Header("Drop")]
     public GameObject fluteDrop;
+    public shootingScript shooting;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class targetScript : MonoBehaviour
         {
             fluteDrop.SetActive(false);
         }
+        shooting.monsterNotDead = true;
     }
 
     public void takeDamage(float damageAmount)
@@ -59,7 +61,7 @@ public class targetScript : MonoBehaviour
             fluteDrop.transform.position = transform.position + Vector3.up * 0.7f;
             fluteDrop.SetActive(true);
         }
-
+        shooting.monsterNotDead = false;
         Destroy(gameObject);
     }
 }
