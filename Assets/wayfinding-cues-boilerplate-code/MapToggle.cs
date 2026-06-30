@@ -19,7 +19,8 @@ public class MapToggle : MonoBehaviour
 
     private void Update()
     {
-        bool toggleMap = (Keyboard.current != null && Keyboard.current.mKey.wasPressedThisFrame);
+        bool toggleMap = (Keyboard.current != null && Keyboard.current.mKey.wasPressedThisFrame)
+                       || (danceMat != null && danceMat.MapDirectThisFrame());
 
         if (toggleMap)
         {
