@@ -101723,10 +101723,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515814ccb0ed8a6adb107baa71b3b895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeaconManager
+  villagerTarget: {fileID: 1005373089}
   wizardTarget: {fileID: 1295587522}
+  potionTarget: {fileID: 1082151829}
   monsterTarget: {fileID: 2078847217}
-  beaconHeight: 4
-  beaconDuration: 3
+  beaconDuration: 4
 --- !u!4 &1232596825
 Transform:
   m_ObjectHideFlags: 0
@@ -137625,6 +137626,7 @@ MonoBehaviour:
   speakerNameText: {fileID: 987350670}
   dialogueText: {fileID: 2142238871}
   breadcrumbsPath: {fileID: 0}
+  beaconManager: {fileID: 0}
 --- !u!136 &1498702022
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -145845,15 +145847,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.35403466
+      value: -0.35403457
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.1101146
+      value: -0.11011456
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.88682246
+      value: 0.8868225
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028722399, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
@@ -145861,11 +145863,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.12468112
+      value: -0.12468124
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0153039
+      value: 0.015303914
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
@@ -145873,7 +145875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.120864965
+      value: -0.12086496
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028842623, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalScale.x

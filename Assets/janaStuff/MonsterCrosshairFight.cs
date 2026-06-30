@@ -14,10 +14,12 @@ public class MonsterCrosshairFight : MonoBehaviour
     [SerializeField] private float damage = 20f;
 
     private targetScript monsterTarget;
+    private DancematTranslater danceMat;
 
     void Start()
     {
         monsterTarget = GetComponent<targetScript>();
+        danceMat = FindObjectOfType<DancematTranslater>();
 
         if (crosshair != null)
             crosshair.SetActive(false);
@@ -46,7 +48,9 @@ public class MonsterCrosshairFight : MonoBehaviour
     if (!fightActive)
         return;
 
-    if (Keyboard.current.eKey.wasPressedThisFrame)
+    bool shootPressed = Keyboard.current.eKey.wasPressedThisFrame
+        || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+    if (shootPressed)
     {
         Shoot();
     }
