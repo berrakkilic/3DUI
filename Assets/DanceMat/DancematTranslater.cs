@@ -64,23 +64,27 @@ public class DancematTranslater : MonoBehaviour
         {
             if (control is not ButtonControl button) continue;
             string path = button.path;
+            string name = button.name;
 
-            // hinten links = shift modifier
-            if (path == "/Gamepad/leftShoulder" && button.IsPressed()) shiftHeld = true;
-            // pfeil nach links
-            if (path == "/Gamepad/buttonWest" && button.IsPressed()) leftArrow = true;
-            // pfeil nach rechts
-            if (path == "/Gamepad/buttonNorth" && button.IsPressed()) rightArrow = true;
-            // pfeil nach vorne
-            if (path == "/Gamepad/buttonEast" && button.IsPressed()) forwardArrow = true;
-            // pfeil nach hinten
-            if (path == "/Gamepad/buttonSouth" && button.IsPressed()) backwardArrow = true;
-            // hinten rechts = hint menu
+            // --- Linux: Gamepad-Layout ---
+            if (path == "/Gamepad/leftShoulder"  && button.IsPressed())        shiftHeld = true;
+            if (path == "/Gamepad/buttonWest"    && button.IsPressed())        leftArrow = true;
+            if (path == "/Gamepad/buttonNorth"   && button.IsPressed())        rightArrow = true;
+            if (path == "/Gamepad/buttonEast"    && button.IsPressed())        forwardArrow = true;
+            if (path == "/Gamepad/buttonSouth"   && button.IsPressed())        backwardArrow = true;
             if (path == "/Gamepad/rightShoulder" && button.wasPressedThisFrame) matMapToggled = true;
-            // select
-            if (path == "/Gamepad/select" && button.wasPressedThisFrame) selectJustPressed = true;
-            // start = restart
-            if (path == "/Gamepad/start" && button.wasPressedThisFrame) matRestart = true;
+            if (path == "/Gamepad/select"        && button.wasPressedThisFrame) selectJustPressed = true;
+            if (path == "/Gamepad/start"         && button.wasPressedThisFrame) matRestart = true;
+
+            // --- Windows: Joystick/HID-Layout (button.name, da Gerätename im Pfad variiert) ---
+            if (name == "trigger"  && button.IsPressed())         leftArrow = true;
+            if (name == "button2"  && button.IsPressed())         backwardArrow = true;
+            if (name == "button3"  && button.IsPressed())         forwardArrow = true;
+            if (name == "button4"  && button.IsPressed())         rightArrow = true;
+            if (name == "button5"  && button.IsPressed())         shiftHeld = true;
+            if (name == "button6"  && button.wasPressedThisFrame) matMapToggled = true;
+            if (name == "button9"  && button.wasPressedThisFrame) selectJustPressed = true;
+            if (name == "button10" && button.wasPressedThisFrame) matRestart = true;
         }
 
         // select allein = interact + spell / mit shift = dialog zurück
