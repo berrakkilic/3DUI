@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class BreadcrumbsPath : MonoBehaviour
 {
@@ -28,6 +29,15 @@ public class BreadcrumbsPath : MonoBehaviour
     [SerializeField] private Transform villagerTarget;
     [SerializeField] private Transform wizardTarget;
     [SerializeField] private Transform potionTarget;
+    
+    [Header("End State")]
+    [SerializeField] private bool breadcrumbsDisabled = false;
+    [SerializeField] private GameObject noHintsMessagePanel;
+    [SerializeField] private TMP_Text noHintsMessageText;
+    [SerializeField] private string noHintsMessage = "No more hints available.";
+    [SerializeField] private float noHintsMessageDuration = 2.5f;
+
+    private Coroutine noHintsMessageRoutine;
 
     private enum BreadcrumbQuestStep
     {
@@ -47,6 +57,10 @@ public class BreadcrumbsPath : MonoBehaviour
         currentPath = new NavMeshPath();
         SetTargetForCurrentQuestStep();
         HideMarkers();
+        
+        if (noHintsMessagePanel != null)
+            noHintsMessagePanel.SetActive(false);
+        
         danceMat = FindObjectOfType<DancematTranslater>();
     }
 
@@ -63,6 +77,13 @@ public class BreadcrumbsPath : MonoBehaviour
 
     public void CastBreadcrumbSpell()
     {
+        if (breadcrumbsDisabled)
+        {
+            HideMarkers();
+            ShowNoHintsMessage();
+            return;
+        }
+
         SetTargetForCurrentQuestStep();
 
         if (revealRoutine != null)
@@ -252,5 +273,42 @@ public class BreadcrumbsPath : MonoBehaviour
                 marker.SetActive(false);
             }
         }
+    }
+    
+    public void DisableBreadcrumbs()
+    {
+        breadcrumbsDisabled = true;
+
+        if (revealRoutine != null)
+        {
+            StopCoroutine(revealRoutine);
+            revealRoutine = null;
+        }
+
+        HideMarkers();
+    }
+
+    private void ShowNoHintsMessage()
+    {
+        if (noHintsMessagePanel == null || noHintsMessageText == null)
+            return;
+
+        noHintsMessageText.text = noHintsMessage;
+        noHintsMessagePanel.SetActive(true);
+
+        if (noHintsMessageRoutine != null)
+            StopCoroutine(noHintsMessageRoutine);
+
+        noHintsMessageRoutine = StartCoroutine(HideNoHintsMessageAfterDelay());
+    }
+
+    private IEnumerator HideNoHintsMessageAfterDelay()
+    {
+        yield return new WaitForSeconds(noHintsMessageDuration);
+
+        if (noHintsMessagePanel != null)
+            noHintsMessagePanel.SetActive(false);
+
+        noHintsMessageRoutine = null;
     }
 }

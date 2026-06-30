@@ -10,6 +10,7 @@ public class potionScript : MonoBehaviour
     public GameObject portalEntrance;
     public GameObject carryPotion;
     public bool dropOnce;
+    private BreadcrumbsPath breadcrumbsPath;
 
     [Header("Drink Message UI")]
     [SerializeField] private GameObject drinkMessagePanel;
@@ -40,6 +41,7 @@ public class potionScript : MonoBehaviour
         dropOnce = false;
         danceMat = FindObjectOfType<DancematTranslater>();
         beaconManager = FindObjectOfType<BeaconManager>();
+        breadcrumbsPath = FindObjectOfType<BreadcrumbsPath>();
     }
 
     void Update()
@@ -69,6 +71,9 @@ public class potionScript : MonoBehaviour
 
         if (beaconManager != null)
             beaconManager.OnPotionDrunk();
+
+        if (breadcrumbsPath != null)
+            breadcrumbsPath.DisableBreadcrumbs();
 
         ShowDrinkMessage();
 
