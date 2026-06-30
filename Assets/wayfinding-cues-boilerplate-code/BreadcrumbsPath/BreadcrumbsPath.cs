@@ -13,8 +13,11 @@ public class BreadcrumbsPath : MonoBehaviour
     [SerializeField] private float markerYOffset = 0.05f;
 
     [Header("Spell Configuration")]
-    [SerializeField] private float revealDuration = 5.0f;
-    [SerializeField] private bool recalculateWhileVisible = true;
+    [SerializeField] private float revealDuration = 20.0f;
+
+    [Header("Collectible Configuration")]
+    [SerializeField] private bool markersAreCollectible = true;
+    [SerializeField] private float collectDistance = 1.5f;
 
     [Header("Path Configuration")]
     [SerializeField] private Transform player;
@@ -41,9 +44,7 @@ public class BreadcrumbsPath : MonoBehaviour
     private void Awake()
     {
         currentPath = new NavMeshPath();
-
         SetTargetForCurrentQuestStep();
-
         HideMarkers();
     }
 
@@ -67,7 +68,17 @@ public class BreadcrumbsPath : MonoBehaviour
             StopCoroutine(revealRoutine);
         }
 
-        revealRoutine = StartCoroutine(RevealBreadcrumbsRoutine());
+        HideMarkers();
+
+        if (TryCalculatePath(out Vector3[] pathCorners))
+        {
+            UpdateMarkers(pathCorners);
+            revealRoutine = StartCoroutine(RevealBreadcrumbsRoutine());
+        }
+        else
+        {
+            Debug.LogWarning("Could not calculate breadcrumb path.");
+        }
     }
 
     public void OnNPCDialogueCompleted(NPCDialogue npc)
@@ -80,14 +91,12 @@ public class BreadcrumbsPath : MonoBehaviour
         {
             currentQuestStep = BreadcrumbQuestStep.ToWizard;
             SetTargetForCurrentQuestStep();
-            RefreshVisibleBreadcrumbs();
         }
         else if (npc.breadcrumbStoryRole == NPCDialogue.BreadcrumbStoryRole.Wizard
             && currentQuestStep == BreadcrumbQuestStep.ToWizard)
         {
             currentQuestStep = BreadcrumbQuestStep.ToMonster;
             SetTargetForCurrentQuestStep();
-            RefreshVisibleBreadcrumbs();
         }
     }
 
@@ -112,37 +121,15 @@ public class BreadcrumbsPath : MonoBehaviour
         }
     }
 
-    private void RefreshVisibleBreadcrumbs()
-    {
-        if (revealRoutine == null)
-            return;
-
-        if (TryCalculatePath(out Vector3[] pathCorners))
-        {
-            UpdateMarkers(pathCorners);
-        }
-        else
-        {
-            HideMarkers();
-        }
-    }
-
     private IEnumerator RevealBreadcrumbsRoutine()
     {
         float timer = 0f;
 
         while (timer < revealDuration)
         {
-            if (recalculateWhileVisible || timer == 0f)
+            if (markersAreCollectible)
             {
-                if (TryCalculatePath(out Vector3[] pathCorners))
-                {
-                    UpdateMarkers(pathCorners);
-                }
-                else
-                {
-                    HideMarkers();
-                }
+                CollectNearbyMarkers();
             }
 
             timer += Time.deltaTime;
@@ -151,6 +138,25 @@ public class BreadcrumbsPath : MonoBehaviour
 
         HideMarkers();
         revealRoutine = null;
+    }
+
+    private void CollectNearbyMarkers()
+    {
+        if (player == null)
+            return;
+
+        foreach (GameObject marker in markers)
+        {
+            if (marker == null || !marker.activeSelf)
+                continue;
+
+            float distanceToPlayer = Vector3.Distance(player.position, marker.transform.position);
+
+            if (distanceToPlayer <= collectDistance)
+            {
+                marker.SetActive(false);
+            }
+        }
     }
 
     private bool TryCalculatePath(out Vector3[] pathCorners)
