@@ -10,6 +10,7 @@ public class DancematTranslater : MonoBehaviour
     private bool matInteracted = false;
     private bool matSpellCast = false;
     private bool matMapToggled = false;
+    private bool matBreadcrumbs = false;
     private bool matDialogNext = false;
     private bool matDialogBack = false;
     private bool matRestart = false;
@@ -27,6 +28,7 @@ public class DancematTranslater : MonoBehaviour
         matInteracted = false;
         matSpellCast = false;
         matMapToggled = false;
+        matBreadcrumbs = false;
         matDialogNext = false;
         matDialogBack = false;
         matRestart = false;
@@ -45,6 +47,7 @@ public class DancematTranslater : MonoBehaviour
     public bool PlayerSelectedThisFrame() => matInteracted;
     public bool SpellCastThisFrame() => matSpellCast;
     public bool MapToggledThisFrame() => matMapToggled;
+    public bool BreadcrumbsThisFrame() => matBreadcrumbs;
     public bool DialogNextThisFrame() => matDialogNext;
     public bool DialogBackThisFrame() => matDialogBack;
     public bool RestartPressedThisFrame() => matRestart;
@@ -83,6 +86,8 @@ public class DancematTranslater : MonoBehaviour
             if (name == "button4"  && button.IsPressed())         rightArrow = true;
             if (name == "button5"  && button.IsPressed())         shiftHeld = true;
             if (name == "button6"  && button.wasPressedThisFrame) matMapToggled = true;
+            if (name == "button7"  && button.wasPressedThisFrame) matMapToggled = true;
+            if (name == "button8"  && button.wasPressedThisFrame) matBreadcrumbs = true;
             if (name == "button9"  && button.wasPressedThisFrame) selectJustPressed = true;
             if (name == "button10" && button.wasPressedThisFrame) matRestart = true;
         }

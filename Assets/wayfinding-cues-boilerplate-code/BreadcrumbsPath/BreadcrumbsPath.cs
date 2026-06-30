@@ -40,20 +40,22 @@ public class BreadcrumbsPath : MonoBehaviour
 
     private NavMeshPath currentPath;
     private Coroutine revealRoutine;
+    private DancematTranslater danceMat;
 
     private void Awake()
     {
         currentPath = new NavMeshPath();
         SetTargetForCurrentQuestStep();
         HideMarkers();
+        danceMat = FindObjectOfType<DancematTranslater>();
     }
 
     private void Update()
     {
-        if (Keyboard.current == null)
-            return;
+        bool pressed = (Keyboard.current != null && Keyboard.current.bKey.wasPressedThisFrame)
+            || (danceMat != null && danceMat.BreadcrumbsThisFrame());
 
-        if (Keyboard.current.bKey.wasPressedThisFrame)
+        if (pressed)
         {
             CastBreadcrumbSpell();
         }
