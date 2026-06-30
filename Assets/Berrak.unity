@@ -89637,15 +89637,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4405133741599901261, guid: e16fb24506f09ac498ad8efc6a62d241, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.37
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405133741599901261, guid: e16fb24506f09ac498ad8efc6a62d241, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405133741599901261, guid: e16fb24506f09ac498ad8efc6a62d241, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.044
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405133741599901261, guid: e16fb24506f09ac498ad8efc6a62d241, type: 3}
       propertyPath: m_LocalRotation.w
@@ -126728,7 +126728,7 @@ Transform:
   m_GameObject: {fileID: 1480818987}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70770186, y: -0, z: -0, w: 0.7065112}
-  m_LocalPosition: {x: 45.37, y: -2.13, z: 37.044}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.07366199, y: 0.073662, z: 0.073662}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137310,6 +137310,10 @@ MonoBehaviour:
   portalEntrance: {fileID: 1286629987}
   carryPotion: {fileID: 1373837235}
   dropOnce: 0
+  drinkMessagePanel: {fileID: 739151248}
+  drinkMessageText: {fileID: 2142238871}
+  drinkMessage: Ahh... tastes bad.
+  messageDuration: 2.5
 --- !u!114 &1498702024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145793,8 +145797,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607890712}
-  - component: {fileID: 1607890713}
   - component: {fileID: 1607890714}
+  - component: {fileID: 1607890715}
   m_Layer: 0
   m_Name: potion
   m_TagString: Untagged
@@ -145811,7 +145815,7 @@ Transform:
   m_GameObject: {fileID: 1607890711}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.24, y: 0.372, z: 0.142}
+  m_LocalPosition: {x: 36.06, y: -1.73, z: 37.053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -145819,7 +145823,21 @@ Transform:
   - {fileID: 1480818988}
   m_Father: {fileID: 715220253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1607890713
+--- !u!114 &1607890714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607890711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55931470b1d325f4b9c14de2d16561d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  potionScript: {fileID: 1498702023}
+  player: {fileID: 1498702018}
+--- !u!136 &1607890715
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145838,23 +145856,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.9258232
-  m_Height: 0.86490846
+  m_Radius: 0.5
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: -5.8296137, y: -0.34034026, z: -0.39900863}
---- !u!114 &1607890714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607890711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55931470b1d325f4b9c14de2d16561d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  potionScript: {fileID: 1498702023}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1615718757
 GameObject:
   m_ObjectHideFlags: 0
@@ -148198,6 +148203,81 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1671013960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1671013963}
+  - component: {fileID: 1671013962}
+  - component: {fileID: 1671013961}
+  m_Layer: 5
+  m_Name: PotionMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1671013961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671013960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1671013962
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671013960}
+  m_CullTransparentMesh: 1
+--- !u!224 &1671013963
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671013960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 372.5, y: 207.25}
+  m_SizeDelta: {x: 745, y: 414.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1676110379
 GameObject:
   m_ObjectHideFlags: 0
@@ -174072,6 +174152,7 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1671013963}
   - {fileID: 1823688467}
   - {fileID: 119042226}
   - {fileID: 1734199998}

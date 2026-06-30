@@ -1,19 +1,36 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class potionScriptPotion : MonoBehaviour
 {
     public potionScript potionScript;
 
-    public void OnTriggerStay(Collider other)
+    [SerializeField] private Transform player;
+
+    private bool potionWasTaken = false;
+
+    private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("in trigger range");
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        TryPickup(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        TryPickup(other);
+    }
+
+    private void TryPickup(Collider other)
+    {
+        if (potionWasTaken)
+            return;
+
+        if (player != null && other.transform.root != player)
+            return;
+
+        potionWasTaken = true;
+
+        if (potionScript != null)
         {
-            //Debug.Log("pressed correct key");
             potionScript.pickedUpPotion = true;
         }
     }
-
-    
 }

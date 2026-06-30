@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class potionScript : MonoBehaviour
 {
@@ -8,37 +10,96 @@ public class potionScript : MonoBehaviour
     public GameObject portalEntrance;
     public GameObject carryPotion;
     public bool dropOnce;
+
+    [Header("Drink Message UI")]
+    [SerializeField] private GameObject drinkMessagePanel;
+    [SerializeField] private TMP_Text drinkMessageText;
+    [SerializeField] private string drinkMessage = "Ahh... tastes bad.";
+    [SerializeField] private float messageDuration = 2.5f;
+
     private DancematTranslater danceMat;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Coroutine messageRoutine;
+
     void Start()
     {
         pickedUpPotion = false;
-        potion.SetActive(true);
-        carryPotion.SetActive(false);
-        portalEntrance.SetActive(false);
+
+        if (potion != null)
+            potion.SetActive(true);
+
+        if (carryPotion != null)
+            carryPotion.SetActive(false);
+
+        if (portalEntrance != null)
+            portalEntrance.SetActive(false);
+
+        if (drinkMessagePanel != null)
+            drinkMessagePanel.SetActive(false);
+
         dropOnce = false;
         danceMat = FindObjectOfType<DancematTranslater>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (pickedUpPotion)
         {
-            //potion.transform.position = transform.position + transform.rotation * new Vector3(1.0f, 1.0f);
-            potion.SetActive(false);
-            carryPotion.SetActive(true);
+            if (potion != null)
+                potion.SetActive(false);
+
+            if (carryPotion != null)
+                carryPotion.SetActive(true);
         }
 
-        bool dropPressed = (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        bool drinkPressed = (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
             || (danceMat != null && danceMat.PlayerSelectedThisFrame());
-        if (dropPressed && !dropOnce && pickedUpPotion)
+
+        if (drinkPressed && !dropOnce && pickedUpPotion)
         {
-            dropOnce = true;
-            pickedUpPotion = false;
-            carryPotion.SetActive(false);
-            portalEntrance.SetActive(true);
-            portalEntrance.transform.position = carryPotion.transform.position + new Vector3(-2.0f, -1.0f, 1.0f);
+            DrinkPotion();
         }
+    }
+
+    private void DrinkPotion()
+    {
+        dropOnce = true;
+        pickedUpPotion = false;
+
+        ShowDrinkMessage();
+
+        Vector3 portalPosition = transform.position + transform.rotation * new Vector3(-2.0f, 0.0f, 1.0f);
+
+        if (carryPotion != null)
+            carryPotion.SetActive(false);
+
+        if (portalEntrance != null)
+        {
+            portalEntrance.SetActive(true);
+            portalEntrance.transform.position = portalPosition;
+        }
+    }
+
+    private void ShowDrinkMessage()
+    {
+        if (drinkMessagePanel == null || drinkMessageText == null)
+            return;
+
+        drinkMessageText.text = drinkMessage;
+        drinkMessagePanel.SetActive(true);
+
+        if (messageRoutine != null)
+            StopCoroutine(messageRoutine);
+
+        messageRoutine = StartCoroutine(HideDrinkMessageAfterDelay());
+    }
+
+    private IEnumerator HideDrinkMessageAfterDelay()
+    {
+        yield return new WaitForSeconds(messageDuration);
+
+        if (drinkMessagePanel != null)
+            drinkMessagePanel.SetActive(false);
+
+        messageRoutine = null;
     }
 }
