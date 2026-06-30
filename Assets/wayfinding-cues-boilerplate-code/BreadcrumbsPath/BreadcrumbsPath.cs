@@ -27,13 +27,13 @@ public class BreadcrumbsPath : MonoBehaviour
     [Header("Story Targets")]
     [SerializeField] private Transform villagerTarget;
     [SerializeField] private Transform wizardTarget;
-    [SerializeField] private Transform monsterTarget;
+    [SerializeField] private Transform potionTarget;
 
     private enum BreadcrumbQuestStep
     {
         ToVillager,
         ToWizard,
-        ToMonster
+        ToPotion
     }
 
     [SerializeField] private BreadcrumbQuestStep currentQuestStep = BreadcrumbQuestStep.ToVillager;
@@ -95,7 +95,7 @@ public class BreadcrumbsPath : MonoBehaviour
         else if (npc.breadcrumbStoryRole == NPCDialogue.BreadcrumbStoryRole.Wizard
             && currentQuestStep == BreadcrumbQuestStep.ToWizard)
         {
-            currentQuestStep = BreadcrumbQuestStep.ToMonster;
+            currentQuestStep = BreadcrumbQuestStep.ToPotion;
             SetTargetForCurrentQuestStep();
         }
     }
@@ -114,9 +114,9 @@ public class BreadcrumbsPath : MonoBehaviour
                     target = wizardTarget;
                 break;
 
-            case BreadcrumbQuestStep.ToMonster:
-                if (monsterTarget != null)
-                    target = monsterTarget;
+            case BreadcrumbQuestStep.ToPotion:
+                if (potionTarget != null)
+                    target = potionTarget;
                 break;
         }
     }
