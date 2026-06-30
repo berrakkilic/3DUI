@@ -9,6 +9,7 @@ public class PlayerDialogueInteraction : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
 
     [SerializeField] private BreadcrumbsPath breadcrumbsPath;
+    [SerializeField] private BeaconManager beaconManager;
 
     private NPCDialogue currentNPC;
     private int currentLineIndex = 0;
@@ -21,6 +22,8 @@ public class PlayerDialogueInteraction : MonoBehaviour
 
         if (breadcrumbsPath == null)
             breadcrumbsPath = FindObjectOfType<BreadcrumbsPath>();
+        if (beaconManager == null)
+            beaconManager = FindObjectOfType<BeaconManager>();
     }
 
     void Update()
@@ -92,9 +95,12 @@ public class PlayerDialogueInteraction : MonoBehaviour
 
     private void EndDialogue(bool completedDialogue)
     {
-        if (completedDialogue && currentNPC != null && breadcrumbsPath != null)
+        if (completedDialogue && currentNPC != null)
         {
-            breadcrumbsPath.OnNPCDialogueCompleted(currentNPC);
+            if (breadcrumbsPath != null)
+                breadcrumbsPath.OnNPCDialogueCompleted(currentNPC);
+            if (beaconManager != null)
+                beaconManager.OnNPCDialogueCompleted(currentNPC);
         }
 
         dialogueOpen = false;

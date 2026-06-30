@@ -4,19 +4,37 @@ using UnityEngine.InputSystem;
 
 public class BeaconManager : MonoBehaviour
 {
+    [SerializeField] private Transform villagerTarget;
     [SerializeField] private Transform wizardTarget;
+    [SerializeField] private Transform potionTarget;
     [SerializeField] private Transform monsterTarget;
-    [SerializeField] private float beaconHeight = 3f;
     [SerializeField] private float beaconDuration = 5f;
 
-    private shootingScript shootingScript;
+    private enum BeaconQuestStep { ToVillager, ToWizard, ToPotion, ToMonster }
+    private BeaconQuestStep currentQuestStep = BeaconQuestStep.ToVillager;
+
     private GameObject beacon;
     private Coroutine beaconRoutine;
 
     private void Start()
     {
-        shootingScript = FindObjectOfType<shootingScript>();
         CreateBeacon();
+    }
+
+    public void OnNPCDialogueCompleted(NPCDialogue npc)
+    {
+        if (npc == null) return;
+
+        if (npc.breadcrumbStoryRole == NPCDialogue.BreadcrumbStoryRole.Villager
+            && currentQuestStep == BeaconQuestStep.ToVillager)
+        {
+            currentQuestStep = BeaconQuestStep.ToWizard;
+        }
+        else if (npc.breadcrumbStoryRole == NPCDialogue.BreadcrumbStoryRole.Wizard
+            && currentQuestStep == BeaconQuestStep.ToWizard)
+        {
+            currentQuestStep = BeaconQuestStep.ToPotion;
+        }
     }
 
     private void Update()
@@ -28,11 +46,11 @@ public class BeaconManager : MonoBehaviour
     private void CreateBeacon()
     {
         beacon = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        beacon.transform.localScale = new Vector3(0.5f, 1.5f, 0.5f);
+        beacon.transform.localScale = new Vector3(0.5f, 500f, 0.5f);
         Destroy(beacon.GetComponent<Collider>());
 
         var mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-        mat.SetColor("_BaseColor", new Color(1f, 0.55f, 0f));
+        mat.SetColor("_BaseColor", Color.yellow);
         beacon.GetComponent<Renderer>().material = mat;
         beacon.SetActive(false);
     }
@@ -46,10 +64,21 @@ public class BeaconManager : MonoBehaviour
         beaconRoutine = StartCoroutine(ShowBeaconRoutine(target));
     }
 
+    public void OnPotionDrunk()
+    {
+        if (currentQuestStep == BeaconQuestStep.ToPotion)
+            currentQuestStep = BeaconQuestStep.ToMonster;
+    }
+
     private Transform GetCurrentTarget()
     {
-        bool outsideVillage = shootingScript != null && shootingScript.isOutsideVillage;
-        return outsideVillage ? monsterTarget : wizardTarget;
+        return currentQuestStep switch
+        {
+            BeaconQuestStep.ToVillager => villagerTarget,
+            BeaconQuestStep.ToWizard => wizardTarget,
+            BeaconQuestStep.ToPotion => potionTarget,
+            _ => monsterTarget,
+        };
     }
 
     private IEnumerator ShowBeaconRoutine(Transform target)
@@ -60,7 +89,7 @@ public class BeaconManager : MonoBehaviour
         while (timer < beaconDuration)
         {
             if (target != null)
-                beacon.transform.position = target.position + Vector3.up * beaconHeight;
+                beacon.transform.position = target.position + Vector3.up * 500f;
             timer += Time.deltaTime;
             yield return null;
         }

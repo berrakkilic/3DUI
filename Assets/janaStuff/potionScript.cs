@@ -18,6 +18,7 @@ public class potionScript : MonoBehaviour
     [SerializeField] private float messageDuration = 2.5f;
 
     private DancematTranslater danceMat;
+    private BeaconManager beaconManager;
     private Coroutine messageRoutine;
 
     void Start()
@@ -38,6 +39,7 @@ public class potionScript : MonoBehaviour
 
         dropOnce = false;
         danceMat = FindObjectOfType<DancematTranslater>();
+        beaconManager = FindObjectOfType<BeaconManager>();
     }
 
     void Update()
@@ -64,6 +66,9 @@ public class potionScript : MonoBehaviour
     {
         dropOnce = true;
         pickedUpPotion = false;
+
+        if (beaconManager != null)
+            beaconManager.OnPotionDrunk();
 
         ShowDrinkMessage();
 
