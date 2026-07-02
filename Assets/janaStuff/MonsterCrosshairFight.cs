@@ -12,6 +12,7 @@ public class MonsterCrosshairFight : MonoBehaviour
     [SerializeField] private float activationDistance = 8f;
     [SerializeField] private float range = 100f;
     [SerializeField] private float damage = 20f;
+    [SerializeField] private GameObject crossbow;
 
     private targetScript monsterTarget;
     private DancematTranslater danceMat;
@@ -35,6 +36,9 @@ public class MonsterCrosshairFight : MonoBehaviour
         if (crosshair != null)
             crosshair.SetActive(false);
 
+        if (crossbow != null)
+            crossbow.SetActive(false);
+
         enabled = false;
         return;
     }
@@ -44,6 +48,9 @@ public class MonsterCrosshairFight : MonoBehaviour
 
     if (crosshair != null)
         crosshair.SetActive(fightActive);
+
+    if (crossbow != null)
+        crossbow.SetActive(fightActive);
 
     if (!fightActive)
         return;
