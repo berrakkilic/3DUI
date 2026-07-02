@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerDialogueInteraction : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlayerDialogueInteraction : MonoBehaviour
 
     [SerializeField] private BreadcrumbsPath breadcrumbsPath;
     [SerializeField] private BeaconManager beaconManager;
+    [SerializeField] private Image dialoguePanelImage;
+
+    [SerializeField] private Color playerColor = new Color(0.2f, 0.3f, 0.5f, 0.85f);
+    [SerializeField] private Color npcColor = new Color(0.15f, 0.15f, 0.15f, 0.85f);
+    [SerializeField] private Color wizardColor = new Color(0.35f, 0.2f, 0.5f, 0.85f);
 
     private NPCDialogue currentNPC;
     private int currentLineIndex = 0;
@@ -87,11 +93,40 @@ public class PlayerDialogueInteraction : MonoBehaviour
         }
     }
 
-    private void ShowLine()
-    {
-        speakerNameText.text = currentNPC.npcName;
-        dialogueText.text = currentNPC.dialogueLines[currentLineIndex];
-    }
+private void ShowLine()
+{
+    Debug.Log("SHOWLINE RUNNING: " + currentNPC.dialogueLines[currentLineIndex]);
+    string line = currentNPC.dialogueLines[currentLineIndex];
+
+    dialogueText.text = line;
+    speakerNameText.text = currentNPC.npcName;
+
+    if (dialoguePanelImage == null)
+        {
+            Debug.LogWarning("Dialogue panel image is NULL");
+            return;
+        }
+
+        Color newColor = npcColor;
+
+        if (line.TrimStart().StartsWith("You:"))
+        {
+            newColor = playerColor;
+        }
+        else if (currentNPC.breadcrumbStoryRole == NPCDialogue.BreadcrumbStoryRole.Wizard)
+        {
+            newColor = wizardColor;
+        }
+        else
+        {
+            newColor = npcColor;
+        }
+
+        dialoguePanelImage.color = newColor;
+
+        Debug.Log("Panel image is: " + dialoguePanelImage.name);
+        Debug.Log("New panel color: " + dialoguePanelImage.color);
+}
 
     private void EndDialogue(bool completedDialogue)
     {

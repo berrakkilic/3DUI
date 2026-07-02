@@ -53325,6 +53325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 567569429}
   - component: {fileID: 567569428}
+  - component: {fileID: 567569430}
   m_Layer: 0
   m_Name: MonsterFightManager
   m_TagString: Untagged
@@ -53350,6 +53351,7 @@ MonoBehaviour:
   activationDistance: 8
   range: 30
   damage: 20
+  crossbow: {fileID: 0}
 --- !u!4 &567569429
 Transform:
   m_ObjectHideFlags: 0
@@ -53365,6 +53367,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567569430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567569427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40079106a2c394df197ed8b1f6bf463d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FightWeaponVisibility
+  player: {fileID: 1498702018}
+  monster: {fileID: 1041632482}
+  crossbow: {fileID: 913178304}
+  crosshair: {fileID: 123578338}
+  activationDistance: 8
 --- !u!1 &570070652
 GameObject:
   m_ObjectHideFlags: 0
@@ -63343,7 +63362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &739151249
 RectTransform:
   m_ObjectHideFlags: 0
@@ -63379,7 +63398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0.40864503, g: 1, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -81020,6 +81039,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1280899642068255851, guid: 0da600d002dc6404693c3b74e0265a3c, type: 3}
   m_PrefabInstance: {fileID: 912269641}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &913178304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+  m_PrefabInstance: {fileID: 1866409055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &913178305 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+  m_PrefabInstance: {fileID: 1866409055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &916373319
 GameObject:
   m_ObjectHideFlags: 0
@@ -87717,6 +87746,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2884351092225532727, guid: 3197d31fe4fd3dd4ab29197ded90cf3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1926009081}
+    - targetCorrespondingSourceObject: {fileID: 2884351092225532727, guid: 3197d31fe4fd3dd4ab29197ded90cf3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1926009083}
   m_SourcePrefab: {fileID: 100100000, guid: 3197d31fe4fd3dd4ab29197ded90cf3c, type: 3}
 --- !u!4 &1005373089 stripped
 Transform:
@@ -90541,6 +90573,12 @@ MonoBehaviour:
   activationDistance: 8
   range: 100
   damage: 20
+  crossbow: {fileID: 0}
+--- !u!4 &1041632482 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6265206175713501824, guid: 24a0663f813d4beb91fc0c6b1e8fef36, type: 3}
+  m_PrefabInstance: {fileID: 525417533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1042590336
 Mesh:
   m_ObjectHideFlags: 0
@@ -111931,6 +111969,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6852676263265631586, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
   m_PrefabInstance: {fileID: 309160755}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1271310511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6852676263265631587, guid: d143fea1f83264842ac6bdd8d4e800f5, type: 3}
+  m_PrefabInstance: {fileID: 309160755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415b3a9bf3fce3049980b72009957e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1276059606
 Mesh:
   m_ObjectHideFlags: 0
@@ -139929,14 +139978,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498702017}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.4812371, z: -0, w: 0.8765905}
+  m_LocalRotation: {x: -0, y: 0.9998278, z: -0, w: -0.018556753}
   m_LocalPosition: {x: 49.06, y: 12.23, z: -253.374}
   m_LocalScale: {x: 1, y: 1.1068095, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1936024884}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 57.532, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 182.127, z: 0}
 --- !u!114 &1498702019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139992,6 +140041,10 @@ MonoBehaviour:
   dialogueText: {fileID: 2142238871}
   breadcrumbsPath: {fileID: 0}
   beaconManager: {fileID: 0}
+  dialoguePanelImage: {fileID: 1683180538}
+  playerColor: {r: 0, g: 0, b: 0, a: 0.6666667}
+  npcColor: {r: 0.20392157, g: 0.3019608, b: 0.5019608, a: 0.6666667}
+  wizardColor: {r: 0.35, g: 0.2, b: 0.5, a: 0.6666667}
 --- !u!136 &1498702022
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -148327,7 +148380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.12468112
+      value: -0.12468113
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
@@ -148335,7 +148388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9846888
+      value: -0.9846889
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
@@ -151465,7 +151518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19245279, g: 0.19245279, b: 0.19245279, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.10980392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -158023,9 +158076,10 @@ Transform:
   - {fileID: 1112405592}
   - {fileID: 1373837238}
   - {fileID: 2081778893}
+  - {fileID: 913178305}
   - {fileID: 1245897521}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 307.336, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 326.426, z: 0}
 --- !u!114 &1823688468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161789,6 +161843,71 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1001 &1866409055
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1823688467}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: m_Name
+      value: StylizedCrossbowUnity
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389602830470214216, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 995169bb6e340ba49a220a53f4c796f5, type: 2}
+    - target: {fileID: 2389602830470214216, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e28208f79b058542b87e9cffb83c6fe, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a07ba7c56b3847e44aa882342cf52020, type: 3}
 --- !u!1 &1871780403
 GameObject:
   m_ObjectHideFlags: 0
@@ -164638,6 +164757,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5084743
   m_Center: {x: 0, y: 0.281744, z: -0.77326965}
+--- !u!114 &1926009083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926009078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1062e4bd21917412a87e45529a6ea95d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDialogueInteraction
+  dialoguePanel: {fileID: 739151248}
+  speakerNameText: {fileID: 987350670}
+  dialogueText: {fileID: 2142238871}
+  breadcrumbsPath: {fileID: 1271310511}
+  beaconManager: {fileID: 1232596824}
+  dialoguePanelImage: {fileID: 1683180538}
+  playerColor: {r: 0.2, g: 0.3, b: 0.5, a: 0.85}
+  npcColor: {r: 0, g: 1, b: 0.23381627, a: 0.85}
+  wizardColor: {r: 0.35, g: 0.2, b: 0.5, a: 0.85}
 --- !u!1 &1935969850
 GameObject:
   m_ObjectHideFlags: 0
