@@ -13,12 +13,12 @@ public class fluteScript : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        Debug.Log("got into trigger zone");
+        //Debug.Log("got into trigger zone");
         bool pressed = Keyboard.current.eKey.wasPressedThisFrame
             || (danceMat != null && danceMat.PlayerSelectedThisFrame());
         if (pressed)
         {
-            Debug.Log("pressed correct key, should pick up flute");
+            //Debug.Log("pressed correct key, should pick up flute");
             fluteScriptPlayer.pickedUpFlute = true;
         }
     }

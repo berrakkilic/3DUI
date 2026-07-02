@@ -77,7 +77,7 @@ public class potionScript : MonoBehaviour
 
         ShowDrinkMessage();
 
-        Vector3 portalPosition = transform.position + transform.rotation * new Vector3(-2.0f, 0.0f, 1.0f);
+        Vector3 portalPosition = transform.position + transform.rotation * new Vector3(2.0f, 0.0f, 1.0f);
 
         if (carryPotion != null)
             carryPotion.SetActive(false);
