@@ -85,7 +85,7 @@ public class potionScript : MonoBehaviour
         if (portalEntrance != null)
         {
             portalEntrance.SetActive(true);
-            portalEntrance.transform.position = portalPosition;
+            //portalEntrance.transform.position = portalPosition;
         }
     }
 

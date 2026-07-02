@@ -8,7 +8,11 @@ public class targetScript : MonoBehaviour
     public float health;
 
     [Header("UI")]
-    public Slider healthBar;
+    public GameObject heartOne;
+    public GameObject heartTwo;
+    public GameObject heartThree;
+    public GameObject heartFour;
+    public GameObject heartFive;
 
     [Header("Drop")]
     public GameObject fluteDrop;
@@ -18,12 +22,12 @@ public class targetScript : MonoBehaviour
     {
         health = maxHealth;
 
-        if (healthBar != null)
-        {
-            healthBar.maxValue = maxHealth;
-            healthBar.value = health;
-            healthBar.gameObject.SetActive(false);
-        }
+        heartOne.SetActive(true);
+        heartTwo.SetActive(true);
+        heartThree.SetActive(true);
+        heartFour.SetActive(true);
+        heartFive.SetActive(true);
+            
 
         if (fluteDrop != null)
         {
@@ -37,25 +41,32 @@ public class targetScript : MonoBehaviour
         health -= damageAmount;
         health = Mathf.Clamp(health, 0, maxHealth);
 
-        if (healthBar != null)
+        if (health < 100)
         {
-            healthBar.gameObject.SetActive(true);
-            healthBar.value = health;
+            heartFive.SetActive(false);
+        }
+        if (health < 80)
+        {
+            heartFour.SetActive(false);
+        }
+        if (health < 60)
+        {
+            heartThree.SetActive(false);
+        }
+        if (health < 40)
+        {
+            heartTwo.SetActive(false);
         }
 
         if (health <= 0)
         {
+            heartOne.SetActive(false);
             Die();
         }
     }
 
     private void Die()
     {
-        if (healthBar != null)
-        {
-            healthBar.gameObject.SetActive(false);
-        }
-
         if (fluteDrop != null)
         {
             fluteDrop.transform.position = transform.position + Vector3.up * 0.7f;
