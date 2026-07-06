@@ -21,6 +21,9 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
+    m_path: Assets/introScene.unity
+    m_guid: 79de6e131716b5346be5559f3e2d6993
+  - m_enabled: 1
     m_path: Assets/Berrak.unity
     m_guid: beec879cce7010a4d9cab0f98eb6fb31
   m_HasScriptingDefines: 0

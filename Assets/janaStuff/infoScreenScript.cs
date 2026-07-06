@@ -4,12 +4,16 @@ using UnityEngine.InputSystem;
 public class infoScreenScript : MonoBehaviour
 {
     public GameObject infoScreen;
+    public GameObject secondScreen;
+    public GameObject panel;
     private DancematTranslater danceMat;
+    public bool doSecondScreen;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         danceMat = FindObjectOfType<DancematTranslater>();
+        doSecondScreen = true;
     }
 
     // Update is called once per frame
@@ -19,7 +23,18 @@ public class infoScreenScript : MonoBehaviour
             || (danceMat != null && danceMat.PlayerSelectedThisFrame());
         if (pressed)
         {
-            infoScreen.SetActive(false);
+            if (doSecondScreen)
+            {
+                infoScreen.SetActive(false);
+                secondScreen.SetActive(true);
+                doSecondScreen= false;
+            }
+            else
+            {
+                secondScreen.SetActive(false);
+                panel.SetActive(false);
+                doSecondScreen = true;
+            }
         }
     }
 }

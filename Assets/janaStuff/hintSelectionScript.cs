@@ -9,6 +9,7 @@ public class hintSelectionScript : MonoBehaviour
     public Button beaconButton; // =1
     public Button pathButton; // =2
     public GameObject buttonsExplain; //=3
+    public GameObject buttonsExplainBack;
     public Button explainButton;
 
     public int selection = 0;
@@ -141,6 +142,7 @@ public class hintSelectionScript : MonoBehaviour
                 break;
             case 3:
                 buttonsExplain.SetActive(true);
+                buttonsExplainBack.SetActive(true);
                 break;
             default:
                 Debug.Log("sth went wrong in the hint selection process #2");
