@@ -55030,7 +55030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &773636163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -121227,6 +121227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   potionScript: {fileID: 1498702023}
+  playerInZone: 0
 --- !u!136 &1607890715
 CapsuleCollider:
   m_ObjectHideFlags: 0
