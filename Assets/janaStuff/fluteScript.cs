@@ -6,20 +6,32 @@ public class fluteScript : MonoBehaviour
     public fluteScriptPlayer fluteScriptPlayer;
     private DancematTranslater danceMat;
 
+    private bool playerInZone;
+
     void Start()
     {
         danceMat = FindObjectOfType<DancematTranslater>();
+        playerInZone = false;
     }
 
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("got into trigger zone");
-        bool pressed = Keyboard.current.eKey.wasPressedThisFrame
-            || (danceMat != null && danceMat.PlayerSelectedThisFrame());
-        if (pressed)
+        playerInZone = true;
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        playerInZone = false;
+    }
+
+    private void Update()
+    {
+        bool pressed = Keyboard.current.eKey.wasPressedThisFrame || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+        if (pressed && playerInZone)
         {
             //Debug.Log("pressed correct key, should pick up flute");
             fluteScriptPlayer.pickedUpFlute = true;
         }
     }
+
 }

@@ -25,20 +25,12 @@ public class potionScript : MonoBehaviour
     void Start()
     {
         pickedUpPotion = false;
-
-        if (potion != null)
-            potion.SetActive(true);
-
-        if (carryPotion != null)
-            carryPotion.SetActive(false);
-
-        if (portalEntrance != null)
-            portalEntrance.SetActive(false);
-
-        if (drinkMessagePanel != null)
-            drinkMessagePanel.SetActive(false);
-
+        potion.SetActive(true);
+        carryPotion.SetActive(false);
+        portalEntrance.SetActive(false);
+        drinkMessagePanel.SetActive(false);
         dropOnce = false;
+
         danceMat = FindObjectOfType<DancematTranslater>();
         beaconManager = FindObjectOfType<BeaconManager>();
         breadcrumbsPath = FindObjectOfType<BreadcrumbsPath>();
@@ -48,17 +40,12 @@ public class potionScript : MonoBehaviour
     {
         if (pickedUpPotion)
         {
-            if (potion != null)
-                potion.SetActive(false);
-
-            if (carryPotion != null)
-                carryPotion.SetActive(true);
+            potion.SetActive(false);
+            carryPotion.SetActive(true);
         }
 
-        bool drinkPressed = (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
-            || (danceMat != null && danceMat.PlayerSelectedThisFrame());
 
-        if (drinkPressed && !dropOnce && pickedUpPotion)
+        if (((Keyboard.current.eKey.wasPressedThisFrame) || (danceMat != null && danceMat.PlayerSelectedThisFrame())) && !dropOnce && pickedUpPotion)
         {
             DrinkPotion();
         }
@@ -70,23 +57,24 @@ public class potionScript : MonoBehaviour
         pickedUpPotion = false;
 
         if (beaconManager != null)
+        {
             beaconManager.OnPotionDrunk();
+        }
 
         if (breadcrumbsPath != null)
+        {
             breadcrumbsPath.DisableBreadcrumbs();
+        }
+            
 
         ShowDrinkMessage();
 
-        Vector3 portalPosition = transform.position + transform.rotation * new Vector3(2.0f, 0.0f, 1.0f);
+        //Vector3 portalPosition = transform.position + transform.rotation * new Vector3(2.0f, 0.0f, 1.0f);
 
-        if (carryPotion != null)
-            carryPotion.SetActive(false);
-
-        if (portalEntrance != null)
-        {
-            portalEntrance.SetActive(true);
+        carryPotion.SetActive(false);
+        portalEntrance.SetActive(true);
             //portalEntrance.transform.position = portalPosition;
-        }
+        
     }
 
     private void ShowDrinkMessage()
