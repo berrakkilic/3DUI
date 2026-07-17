@@ -41610,6 +41610,7 @@ MonoBehaviour:
   player: {fileID: 1498702018}
   fpsCam: {fileID: 1823688466}
   crosshair: {fileID: 0}
+  hearts: {fileID: 0}
   activationDistance: 8
   range: 30
   damage: 20
@@ -74843,6 +74844,7 @@ MonoBehaviour:
   player: {fileID: 1498702018}
   fpsCam: {fileID: 1823688466}
   crosshair: {fileID: 123578338}
+  hearts: {fileID: 1510562065}
   activationDistance: 8
   range: 100
   damage: 20
@@ -118030,7 +118032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.12468112
+      value: -0.12468113
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.x
@@ -118038,7 +118040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9846888
+      value: -0.9846889
       objectReference: {fileID: 0}
     - target: {fileID: 8806667431028794931, guid: d56123a0271c76241bb2c7c6253e8c15, type: 3}
       propertyPath: m_LocalRotation.z
