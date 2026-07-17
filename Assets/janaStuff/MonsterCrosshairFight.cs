@@ -7,6 +7,7 @@ public class MonsterCrosshairFight : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Camera fpsCam;
     [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject hearts;
 
     [Header("Settings")]
     [SerializeField] private float activationDistance = 8f;
@@ -22,46 +23,60 @@ public class MonsterCrosshairFight : MonoBehaviour
         monsterTarget = GetComponent<targetScript>();
         danceMat = FindObjectOfType<DancematTranslater>();
 
-        if (crosshair != null)
-            crosshair.SetActive(false);
-    }
-
-    void Update()
-{
-    if (player == null || fpsCam == null || monsterTarget == null)
-        return;
-
-    if (monsterTarget.health <= 0)
-    {
-        if (crosshair != null)
-            crosshair.SetActive(false);
-
         if (crossbow != null)
             crossbow.SetActive(false);
 
-        enabled = false;
-        return;
+        if (hearts != null)
+            hearts.SetActive(false);
+
+        if (crosshair != null)
+            crosshair.SetActive(false);
     }
 
-    float distance = Vector3.Distance(player.position, transform.position);
-    bool fightActive = distance <= activationDistance;
-
-    if (crosshair != null)
-        crosshair.SetActive(fightActive);
-
-    if (crossbow != null)
-        crossbow.SetActive(fightActive);
-
-    if (!fightActive)
-        return;
-
-    bool shootPressed = Keyboard.current.eKey.wasPressedThisFrame
-        || (danceMat != null && danceMat.PlayerSelectedThisFrame());
-    if (shootPressed)
+void Update()
     {
-        Shoot();
+        if (player == null || fpsCam == null || monsterTarget == null)
+            return;
+
+        if (monsterTarget.health <= 0)
+        {
+            if (crosshair != null)
+                crosshair.SetActive(false);
+
+            if (crossbow != null)
+                crossbow.SetActive(false);
+
+            if (hearts != null)
+                hearts.SetActive(false);
+
+            enabled = false;
+            return;
+        }
+
+        float distance = Vector3.Distance(player.position, transform.position);
+        bool fightActive = distance <= activationDistance;
+
+        if (crosshair != null)
+            crosshair.SetActive(fightActive);
+
+        if (crossbow != null)
+            crossbow.SetActive(fightActive);
+
+        if (hearts != null)
+            hearts.SetActive(fightActive);
+
+        if (!fightActive)
+            return;
+
+        bool shootPressed =
+            (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            || (danceMat != null && danceMat.PlayerSelectedThisFrame());
+
+        if (shootPressed)
+        {
+            Shoot();
+        }
     }
-}
 
     void Shoot()
     {
@@ -77,9 +92,17 @@ public class MonsterCrosshairFight : MonoBehaviour
             {
                 target.takeDamage(damage);
                 Debug.Log("Monster took damage");
-                if (target.health <= 0 && crosshair != null)
+
+                if (target.health <= 0)
                 {
-                    crosshair.SetActive(false);
+                    if (crosshair != null)
+                        crosshair.SetActive(false);
+
+                    if (crossbow != null)
+                        crossbow.SetActive(false);
+
+                    if (hearts != null)
+                        hearts.SetActive(false);
                 }
             }
             else

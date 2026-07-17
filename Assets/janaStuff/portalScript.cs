@@ -5,11 +5,11 @@ public class portalScript : MonoBehaviour
     public GameObject player;
     public GameObject portalExit;
     public shootingScript shootingScript;
-    public GameObject hearts;
+    //public GameObject hearts;
 
     private void Start()
     {
-        hearts.SetActive(false);
+        //hearts.SetActive(false);
     }
 
     public void OnTriggerStay(Collider other)
@@ -27,6 +27,6 @@ public class portalScript : MonoBehaviour
         //player.transform.position.Set(portalExit.transform.position.x, portalExit.transform.position.y, portalExit.transform.position.z);
         cc.enabled = true;
         shootingScript.isOutsideVillage = true;
-        hearts.SetActive(true);
+        //hearts.SetActive(true);
     }
 }
